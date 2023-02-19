@@ -3,11 +3,13 @@ package com.guruprasad.teacherattend.Department;
 
 
 import static com.guruprasad.teacherattend.Constants.error_toast;
+import static com.guruprasad.teacherattend.Constants.info_toast;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,50 +24,72 @@ import com.guruprasad.teacherattend.adapter.student_adapter;
 import com.guruprasad.teacherattend.model.student_model;
 
 public class mechanical extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    Spinner spinner ;
+    Spinner year , div ;
     RecyclerView recyclerView ;
    student_adapter adapter ;
+   Button button ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mechanical);
 
 
-        spinner = findViewById(R.id.mechanical_spinner);
-        recyclerView = findViewById(R.id.mechanical_rec);
+        year = findViewById(R.id.year_spinner);
+        div = findViewById(R.id.div_spinner);
+        recyclerView = findViewById(R.id.mech_rec);
+        button = findViewById(R.id.submit);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.choice, android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.year, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        year.setAdapter(adapter);
+        year.setOnItemSelectedListener(this);
+
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.division, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+        div.setAdapter(adapter2);
+        div.setOnItemSelectedListener(this);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                display_student();
+                info_toast(getApplicationContext(),"Please Wait Fetching the data");
+            }
+        });
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(mechanical.this));
+
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String choice = spinner.getSelectedItem().toString();
-
-        switch (choice)
-        {
-            case "Teacher":
-                recyclerView.setLayoutManager(new LinearLayoutManager(mechanical.this));
-                FirebaseRecyclerOptions<student_model> options = new FirebaseRecyclerOptions.Builder<student_model>().setQuery(FirebaseDatabase.getInstance().
-                        getReference("Teachers").child("Mechanical"), student_model.class).build();
-
-                adapter = new student_adapter(options);
-                adapter.startListening();
-                recyclerView.setAdapter(adapter);
-                break;
-
-            case "Student" :
-
-                break;
-            default:
-                error_toast(mechanical.this,"Invalid Input");
-        }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    public void display_student()
+    {
+
+        String Year  =year.getSelectedItem().toString();
+        String division = div.getSelectedItem().toString();
+
+        FirebaseRecyclerOptions<student_model> options = new FirebaseRecyclerOptions.Builder<student_model>().setQuery(FirebaseDatabase.getInstance().
+                getReference("Students").child("Mechanical").child(Year).child(division), student_model.class).build();
+        adapter = new student_adapter(options);
+        adapter.startListening();
+        recyclerView.setAdapter(adapter);
+
+
+
+    }
+
 }

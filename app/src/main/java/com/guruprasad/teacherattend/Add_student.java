@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -78,6 +79,36 @@ public class Add_student extends AppCompatActivity implements AdapterView.OnItem
                 String Year = year.getSelectedItem().toString();
                 String div = division.getSelectedItem().toString();
 
+                if(TextUtils.isEmpty(name))
+                {
+                    student_name.setError("Student name is Invalid");
+                    return;
+                }
+                if (TextUtils.isEmpty(parent_num))
+                {
+                    parent_no.setError("Invalid parent number");
+                    return;
+                }
+                if (parent_num.length()>10)
+                {
+                    parent_no.setError("Invalid parent number");
+                    return;
+                }
+                if (TextUtils.isEmpty(student_num))
+                {
+                    student_no.setError("Invalid student number ");
+                    return;
+                }
+                if (student_num.length()>10)
+                {
+                    student_no.setError("Invalid parent number");
+                    return;
+                }
+                if (TextUtils.isEmpty(stud_email))
+                {
+                    student_email.setError("Email is Invalid");
+                    return;
+                }
 
 
                 ProgressDialog pd = new ProgressDialog(Add_student.this);

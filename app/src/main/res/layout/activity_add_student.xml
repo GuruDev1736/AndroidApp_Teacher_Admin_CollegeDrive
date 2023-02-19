@@ -75,6 +75,9 @@
                 app:boxCornerRadiusTopStart="10dp"
                 app:boxStrokeColor="#448AFF"
                 app:endIconMode="clear_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="10"
+                app:boxStrokeErrorColor="#FF0000"
                 app:endIconTint="#6A6767"
                 app:hintTextColor="#448AFF">
 
@@ -108,6 +111,9 @@
                 app:boxStrokeColor="#448AFF"
                 app:endIconMode="clear_text"
                 app:endIconTint="#6A6767"
+                app:counterMaxLength="10"
+                app:counterEnabled="true"
+                app:boxStrokeErrorColor="#FF0000"
                 app:hintTextColor="#448AFF">
 
                 <com.google.android.material.textfield.TextInputEditText

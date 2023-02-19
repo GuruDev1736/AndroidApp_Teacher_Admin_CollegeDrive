@@ -88,7 +88,5 @@ public class computer extends AppCompatActivity implements AdapterView.OnItemSel
             adapter.startListening();
             recyclerView.setAdapter(adapter);
 
-
-
     }
 }
