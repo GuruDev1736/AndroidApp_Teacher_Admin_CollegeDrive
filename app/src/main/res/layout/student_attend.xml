@@ -6,10 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="25dp"
     android:padding="15dp"
-    app:cardElevation="10dp"
     android:clickable="true"
     android:focusable="true"
     android:id="@+id/cardview"
+    app:cardElevation="10dp"
     app:cardUseCompatPadding="true"
     tools:ignore="UnusedAttribute">
 
@@ -81,6 +81,67 @@
             android:gravity="center"
             android:text="Phone No"
             android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/present"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img1"
+            android:layout_alignStart="@+id/img1"
+            android:layout_alignEnd="@+id/img1"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/green"
+            android:text="P"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/absent"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/present"
+            android:layout_alignBottom="@+id/present"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/present"
+            android:backgroundTint="@color/red"
+            android:text="A"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/call"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/absent"
+            android:layout_alignBottom="@+id/absent"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/absent"
+            android:backgroundTint="#03A9F4"
+            android:src="@drawable/baseline_local_phone_24" />
+
+        <ImageButton
+            android:id="@+id/face_scan"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/call"
+            android:layout_alignEnd="@+id/stud_phone"
+            android:layout_alignBottom="@+id/call"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/call"
+            android:backgroundTint="#03A9F4"
+            android:src="@drawable/outline_face_24" />
+
+
 
     </RelativeLayout>
 

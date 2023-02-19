@@ -1,8 +1,11 @@
 package com.guruprasad.teacherattend.Attendance;
 
+import static com.guruprasad.teacherattend.Constants.error_toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,9 +15,14 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.guruprasad.teacherattend.R;
+import com.guruprasad.teacherattend.attendance_student;
+
+import es.dmoral.toasty.Toasty;
 
 public class Computer extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
         Spinner year , division ;
@@ -43,27 +51,58 @@ public class Computer extends AppCompatActivity implements AdapterView.OnItemSel
         division.setAdapter(adapter2);
         division.setOnItemSelectedListener(this);
 
+        try {
+            CalendarConstraints.Builder calendarConstraintBuilder = new CalendarConstraints.Builder();
+            calendarConstraintBuilder.setValidator(DateValidatorPointBackward.now());
 
-        MaterialDatePicker.Builder materialDateBuilder = MaterialDatePicker.Builder.datePicker();
-        materialDateBuilder.setTitleText("SELECT A DATE");
-        final MaterialDatePicker materialDatePicker = materialDateBuilder.build();
-        button.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
-                    }
-                });
-        materialDatePicker.addOnPositiveButtonClickListener(
-                new MaterialPickerOnPositiveButtonClickListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onPositiveButtonClick(Object selection) {
-                        date.setText(materialDatePicker.getHeaderText());
-                    }
-                });
+            MaterialDatePicker.Builder materialDateBuilder = MaterialDatePicker.Builder.datePicker();
+            long today = MaterialDatePicker.todayInUtcMilliseconds();
+            materialDateBuilder.setSelection(today);
+            materialDateBuilder.setTitleText("SELECT A DATE");
+
+            materialDateBuilder.setCalendarConstraints(calendarConstraintBuilder.build());
+            final MaterialDatePicker materialDatePicker = materialDateBuilder.build();
+            button.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
+                        }
+                    });
+            materialDatePicker.addOnPositiveButtonClickListener(
+                    new MaterialPickerOnPositiveButtonClickListener() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onPositiveButtonClick(Object selection) {
+                            date.setText(materialDatePicker.getHeaderText());
+                        }
+                    });
+        }
+        catch (Exception e) {
+            Toasty.error(Computer.this,"Error : "+e.getMessage(),Toasty.LENGTH_LONG,true).show();
+        }
 
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String Year = year.getSelectedItem().toString();
+                String div  = division.getSelectedItem().toString();
+                String Date = date.getText().toString();
+
+                if (Date.equals("date"))
+                {
+                    error_toast(getApplicationContext(),"Date is Invalid");
+                    return;
+                }
+
+                Intent intent = new Intent(getApplicationContext(), attendance_student.class);
+                intent.putExtra("year",Year);
+                intent.putExtra("div",div);
+                intent.putExtra("date",Date);
+                startActivity(intent);
+            }
+        });
 
 
     }
