@@ -1,8 +1,22 @@
 package com.guruprasad.teacherattend.adapter;
 
+
+import static com.guruprasad.teacherattend.Constants.error_toast;
+import static com.guruprasad.teacherattend.Constants.success_toast;
+
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,16 +25,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.guruprasad.teacherattend.R;
+import com.guruprasad.teacherattend.attendance_student;
+import com.guruprasad.teacherattend.model.attendance_model;
 import com.guruprasad.teacherattend.model.student_model;
 
-public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,attendance_adapter.onviewholder> {
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+
+public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,attendance_adapter.onviewholder> {
 
     public attendance_adapter(@NonNull FirebaseRecyclerOptions<student_model> options) {
         super(options);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onBindViewHolder(@NonNull onviewholder holder, int position, @NonNull student_model model) {
 
@@ -28,6 +55,186 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
         holder.department.setText("Department : "+model.getDepartment());
         holder.year.setText("Year : "+model.getYear());
         holder.Phone.setText("Phone No : "+model.getStud_no());
+        String key = holder.databaseReference.push().getKey();
+
+
+
+
+        holder.present.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                holder.imageView.setBackgroundColor(Color.GREEN);
+                String attendance = "Present";
+
+
+                ProgressDialog pd = new ProgressDialog(view.getContext());
+                pd.setTitle("Marking Attendance");
+                pd.setMessage("Please Wait...");
+                pd.setCancelable(false);
+                pd.setCanceledOnTouchOutside(false);
+                pd.show();
+
+                String date = null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                }
+
+
+                attendance_model attendance_model = new attendance_model(model.getStud_name(),model.getDepartment(),model.getStud_no(),model.getDivision()
+                ,model.getYear(),attendance,date,key);
+
+                holder.databaseReference.child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision())
+                        .child(key)
+                        .setValue(attendance_model).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                success_toast(view.getContext(), model.getStud_name()+" Present");
+                                pd.dismiss();
+                                holder.absent.setVisibility(View.INVISIBLE);
+                                holder.present.setVisibility(View.INVISIBLE);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                error_toast(view.getContext(),"Failed to mark attendance : "+e.getMessage());
+                                pd.dismiss();
+                            }
+                        });
+
+
+            }
+        });
+
+        holder.absent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                holder.imageView.setBackgroundColor(Color.RED);
+                String attendance = "Absent";
+                String key = holder.databaseReference.push().getKey();
+
+                ProgressDialog pd = new ProgressDialog(view.getContext());
+                pd.setTitle("Marking Attendance");
+                pd.setMessage("Please Wait...");
+                pd.setCancelable(false);
+                pd.setCanceledOnTouchOutside(false);
+                pd.show();
+
+
+                String date = null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                }
+
+                attendance_model attendance_model = new attendance_model(model.getStud_name(),model.getDepartment(),model.getStud_no(),model.getDivision()
+                        ,model.getYear(),attendance,date,key);
+
+                holder.databaseReference.child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision())
+                        .child(key)
+                        .setValue(attendance_model).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                error_toast(view.getContext(), model.getStud_name()+" Absent");
+                                pd.dismiss();
+                                holder.present.setVisibility(View.INVISIBLE);
+                                holder.absent.setVisibility(View.INVISIBLE);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                error_toast(view.getContext(),"Failed to mark attendance : "+e.getMessage());
+                                pd.dismiss();
+                            }
+                        });
+
+
+            }
+        });
+
+
+        holder.modify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MaterialAlertDialogBuilder(view.getContext(), R.style.AttendanceTheme)
+                        .setTitle("Update Attendance")
+                        .setMessage("Updating the Attendance of "+model.getStud_name())
+                        .setIcon(R.drawable.update)
+                        .setPositiveButton("Present", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                holder.imageView.setBackgroundColor(Color.GREEN);
+
+
+                                String date = null;
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                                }
+
+                                String attendance = "Present" ;
+
+                                HashMap<String , Object> obj = new HashMap<>();
+                                obj.put("attendance",attendance);
+
+                                ProgressDialog pd = new ProgressDialog(view.getContext());
+                                pd.setTitle("Updating Attendance ");
+                                pd.setMessage("Updating Please Wait...... ");
+                                pd.setCancelable(false);
+                                pd.setCanceledOnTouchOutside(false);
+
+                                pd.show();
+                                holder.database.getReference().child("Attendance").child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision()).child(key)
+                                        .updateChildren(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        success_toast(view.getContext(),"Attendance has been updated");
+                                        pd.dismiss();
+                                    }
+                                });
+
+
+                            }
+                        })
+                        .setNeutralButton("Absent", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                holder.imageView.setBackgroundColor(Color.RED);
+
+                                String date = null;
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                                }
+
+                                String attendance = "Absent" ;
+                                HashMap<String , Object> obj = new HashMap<>();
+                                obj.put("attendance",attendance);
+
+                                ProgressDialog pd = new ProgressDialog(view.getContext());
+                                pd.setTitle("Updating Attendance ");
+                                pd.setMessage("Updating Please Wait...... ");
+                                pd.setCancelable(false);
+                                pd.setCanceledOnTouchOutside(false);
+
+                                pd.show();
+                                holder.database.getReference().child("Attendance").child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision()).child(key)
+                                        .updateChildren(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                success_toast(view.getContext(),"Attendance has been updated");
+                                                pd.dismiss();
+                                            }});
+                            }
+                        })
+                        .show();
+            }
+        });
+
+
+
+
+
 
     }
 
@@ -42,6 +249,11 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
 
         TextView name , department , year  , Phone ;
         CardView cardView ;
+        Button present , absent ;
+        ImageButton modify , face  ;
+        DatabaseReference databaseReference ;
+        FirebaseDatabase database;
+        ImageView imageView ;
 
 
         public onviewholder(@NonNull View itemView) {
@@ -52,6 +264,13 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
             year = itemView.findViewById(R.id.stud_year);
             Phone = itemView.findViewById(R.id.stud_phone);
             cardView = itemView.findViewById(R.id.cardview);
+            present = itemView.findViewById(R.id.present);
+            absent = itemView.findViewById(R.id.absent);
+            database = FirebaseDatabase.getInstance();
+            databaseReference = database.getReference("Attendance");
+            modify = itemView.findViewById(R.id.modify);
+            imageView = itemView.findViewById(R.id.img1);
+
         }
     }
 }

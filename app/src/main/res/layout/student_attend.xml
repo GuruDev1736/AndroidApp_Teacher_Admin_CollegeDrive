@@ -115,7 +115,7 @@
             android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/call"
+            android:id="@+id/modify"
             android:clickable="true"
             android:focusable="true"
             android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
             android:layout_marginStart="20dp"
             android:layout_toEndOf="@+id/absent"
             android:backgroundTint="#03A9F4"
-            android:src="@drawable/baseline_local_phone_24" />
+            android:src="@drawable/modify" />
 
         <ImageButton
             android:id="@+id/face_scan"
@@ -133,12 +133,13 @@
             android:focusable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/call"
+            android:layout_alignTop="@+id/modify"
             android:layout_alignEnd="@+id/stud_phone"
-            android:layout_alignBottom="@+id/call"
+            android:layout_alignBottom="@+id/modify"
             android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/call"
+            android:layout_toEndOf="@+id/modify"
             android:backgroundTint="#03A9F4"
+            android:layout_marginEnd="20dp"
             android:src="@drawable/outline_face_24" />
 
 
