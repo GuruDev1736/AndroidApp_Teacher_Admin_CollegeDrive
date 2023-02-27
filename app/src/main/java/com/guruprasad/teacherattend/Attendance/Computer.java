@@ -24,6 +24,7 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.adapter.attendance_adapter;
 import com.guruprasad.teacherattend.attendance_student;
+import com.travijuu.numberpicker.library.NumberPicker;
 
 import java.util.Date;
 import java.util.Locale;
@@ -31,20 +32,22 @@ import java.util.Locale;
 import es.dmoral.toasty.Toasty;
 
 public class Computer extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-        Spinner year , division ;
+        Spinner year , division , subject ;
         Button submit ;
         TextView date ;
-        ImageButton button ;
+        NumberPicker numberPicker ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_computer2);
-
         year = findViewById(R.id.computer_spinner_attendance_year);
         division = findViewById(R.id.computer_spinner_attendance_division);
         submit = findViewById(R.id.submit_attendance);
-        button = findViewById(R.id.calender);
         date = findViewById(R.id.date);
+        subject = findViewById(R.id.computer_spinner_attendance_subject);
+        numberPicker = findViewById(R.id.number_picker);
+
+
 
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.year, android.R.layout.simple_spinner_item);
@@ -56,6 +59,17 @@ public class Computer extends AppCompatActivity implements AdapterView.OnItemSel
         adapter2.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
         division.setAdapter(adapter2);
         division.setOnItemSelectedListener(this);
+
+
+        ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(this, R.array.computer_subjects, android.R.layout.simple_spinner_item);
+        sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+        subject.setAdapter(sub);
+        subject.setOnItemSelectedListener(this);
+
+
+
+
+
 
 
         String Date = null;
@@ -73,11 +87,15 @@ public class Computer extends AppCompatActivity implements AdapterView.OnItemSel
                 String Year = year.getSelectedItem().toString();
                 String div  = division.getSelectedItem().toString();
                 String Date = date.getText().toString();
+                String sub = subject.getSelectedItem().toString();
+                String sub_no = String.valueOf(numberPicker.getValue());
 
                 Intent intent = new Intent(getApplicationContext(), attendance_student.class);
                 intent.putExtra("year",Year);
                 intent.putExtra("div",div);
                 intent.putExtra("date",Date);
+                intent.putExtra("sub",sub);
+                intent.putExtra("sub_no",sub_no);
                 startActivity(intent);
             }
         });

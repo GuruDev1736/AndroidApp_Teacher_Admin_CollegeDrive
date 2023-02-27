@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dashboard.ui.dashboard.DashboardFragment">
-
+    tools:context=".submission.workbook">
 
     <RelativeLayout
         android:id="@+id/spinner_layout"
@@ -164,47 +163,16 @@
 
     </RelativeLayout>
 
-    <com.travijuu.numberpicker.library.NumberPicker
-        android:id="@+id/number_picker"
+    <Button
+        android:id="@+id/submit_workbook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/spinner_layout_subject"
-        android:layout_alignStart="@+id/spinner_layout_subject"
-        android:layout_alignEnd="@+id/get_sub"
-        android:layout_marginTop="20dp"
-        android:focusable="true"
-        app:custom_layout="@layout/number_picker_layout"
-        app:max="10"
-        app:min="1"
-        app:unit="1"
-        app:value="-5" />
-
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/number_picker"
-        android:layout_alignStart="@+id/spinner_layout_subject"
-        android:layout_alignEnd="@+id/number_picker"
-        android:layout_marginTop="20dp"
-        android:gravity="center|center_horizontal|center_vertical"
-        android:text="date"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/submit_attendance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/date"
-        android:layout_alignStart="@+id/date"
-        android:layout_alignEnd="@+id/date"
+        android:layout_alignStart="@+id/spinner_layout_department"
+        android:layout_alignEnd="@+id/spinner_layout_department"
         android:layout_marginTop="20dp"
         android:text="Submit"
         android:textColor="@color/white"
         android:textSize="18sp" />
-
 
 </RelativeLayout>

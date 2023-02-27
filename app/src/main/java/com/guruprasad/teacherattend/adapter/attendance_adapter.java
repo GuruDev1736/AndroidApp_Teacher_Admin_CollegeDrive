@@ -1,6 +1,7 @@
 package com.guruprasad.teacherattend.adapter;
 
 
+import static android.content.Intent.getIntent;
 import static com.guruprasad.teacherattend.Constants.error_toast;
 import static com.guruprasad.teacherattend.Constants.success_toast;
 
@@ -8,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
@@ -42,10 +44,15 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,attendance_adapter.onviewholder> {
-
-    public attendance_adapter(@NonNull FirebaseRecyclerOptions<student_model> options) {
+    private String myValue;
+    private String sub_no;
+    public attendance_adapter(@NonNull FirebaseRecyclerOptions<student_model> options , String value , String subject_no ) {
         super(options);
+        this.myValue = value;
+        this.sub_no = subject_no;
     }
+
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -84,7 +91,8 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                 attendance_model attendance_model = new attendance_model(model.getStud_name(),model.getDepartment(),model.getStud_no(),model.getDivision()
                 ,model.getYear(),attendance,date,key);
 
-                holder.databaseReference.child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision())
+                holder.databaseReference.child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision()).child(myValue)
+                        .child("Lecture No : "+sub_no)
                         .child(key)
                         .setValue(attendance_model).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -112,7 +120,6 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
 
                 holder.imageView.setBackgroundColor(Color.RED);
                 String attendance = "Absent";
-                String key = holder.databaseReference.push().getKey();
 
                 ProgressDialog pd = new ProgressDialog(view.getContext());
                 pd.setTitle("Marking Attendance");
@@ -130,8 +137,8 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                 attendance_model attendance_model = new attendance_model(model.getStud_name(),model.getDepartment(),model.getStud_no(),model.getDivision()
                         ,model.getYear(),attendance,date,key);
 
-                holder.databaseReference.child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision())
-                        .child(key)
+                holder.databaseReference.child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision()).child(myValue)
+                        .child("Lecture No : "+sub_no) .child(key)
                         .setValue(attendance_model).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
@@ -184,7 +191,8 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                                 pd.setCanceledOnTouchOutside(false);
 
                                 pd.show();
-                                holder.database.getReference().child("Attendance").child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision()).child(key)
+                                holder.database.getReference().child("Attendance").child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision())
+                                        .child(myValue).child("Lecture No : "+sub_no).child(key)
                                         .updateChildren(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
@@ -218,7 +226,8 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                                 pd.setCanceledOnTouchOutside(false);
 
                                 pd.show();
-                                holder.database.getReference().child("Attendance").child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision()).child(key)
+                                holder.database.getReference().child("Attendance").child(date).child(model.getDepartment()).child(model.getYear())
+                                        .child(model.getDivision()).child(myValue).child("Lecture No : "+sub_no).child(key)
                                         .updateChildren(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
@@ -272,5 +281,7 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
             imageView = itemView.findViewById(R.id.img1);
 
         }
-    }
+
+
+}
 }

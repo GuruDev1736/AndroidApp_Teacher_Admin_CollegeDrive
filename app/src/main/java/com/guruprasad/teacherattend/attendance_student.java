@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.guruprasad.teacherattend.Department.computer;
 import com.guruprasad.teacherattend.adapter.attendance_adapter;
@@ -20,9 +21,13 @@ import com.guruprasad.teacherattend.model.student_model;
 import org.w3c.dom.Text;
 
 public class attendance_student extends AppCompatActivity {
-        TextView date , year , division ;
+        TextView date , year , division , subject , sub_no   ;
         attendance_adapter adapter ;
         RecyclerView recyclerView ;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,8 @@ public class attendance_student extends AppCompatActivity {
         year = findViewById(R.id.attendance_year);
         division = findViewById(R.id.attendance_div);
         recyclerView = findViewById(R.id.attendance_rec);
+        sub_no = findViewById(R.id.attendance_sub_no);
+        subject = findViewById(R.id.attendance_subject);
 
 
         Intent intent = getIntent();
@@ -39,15 +46,24 @@ public class attendance_student extends AppCompatActivity {
         date.setText(intent.getStringExtra("date"));
         year.setText(intent.getStringExtra("year"));
         division.setText(intent.getStringExtra("div"));
+        sub_no.setText(intent.getStringExtra("sub_no"));
+        subject.setText(intent.getStringExtra("sub"));
+
+
+        String sub = intent.getStringExtra("sub");
+        String subject_no = intent.getStringExtra("sub_no");
+        String department = intent.getStringExtra("dep");
+
 
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(attendance_student.this));
         FirebaseRecyclerOptions<student_model> options = new FirebaseRecyclerOptions.Builder<student_model>().setQuery(FirebaseDatabase.getInstance().
-                getReference("Students").child("Computer").child(year.getText().toString()).child(division.getText().toString()), student_model.class).build();
-        adapter = new attendance_adapter(options);
+                getReference("Students").child(department).child(year.getText().toString()).child(division.getText().toString()), student_model.class).build();
+        adapter = new attendance_adapter(options,sub,subject_no);
         adapter.startListening();
         recyclerView.setAdapter(adapter);
+
 
 
 
