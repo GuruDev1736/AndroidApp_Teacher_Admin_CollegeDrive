@@ -16,9 +16,8 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="100dp"
+            android:layout_width="350dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.6"
             android:gravity="center"
             android:text="Name"
             android:padding="8dp"
@@ -32,103 +31,18 @@
             android:background="@color/grey" />
 
         <TextView
-            android:id="@+id/tv_karyakshetra_name"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1.2"
-            android:background="@color/blue_app"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="A1"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:textColor="@color/white" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="fill_parent"
-            android:layout_alignParentRight="true"
-            android:background="@color/grey" />
-
-        <TextView
+            android:id="@+id/view_workbook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:background="@color/blue_app"
             android:gravity="center"
+            android:text="Detail"
+            android:textStyle="bold"
+            android:linksClickable="true"
+            android:clickable="true"
+            android:focusable="true"
             android:padding="8dp"
-            android:text="A2"
             android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="fill_parent"
-            android:layout_alignParentRight="true"
-            android:background="@color/grey" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1.1"
-            android:background="@color/blue_app"
-            android:gravity="center"
-            android:text="A3"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="fill_parent"
-            android:layout_alignParentRight="true"
-            android:background="@color/grey" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/blue_app"
-            android:gravity="center"
-            android:text="A4"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="fill_parent"
-            android:layout_alignParentRight="true"
-            android:background="@color/grey" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/blue_app"
-            android:gravity="center"
-            android:text="A5"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="fill_parent"
-            android:layout_alignParentRight="true"
-            android:background="@color/grey" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/blue_app"
-            android:gravity="center"
-            android:text="A6"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:textColor="#000000"/>
 
     </LinearLayout>
 

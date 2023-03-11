@@ -17,6 +17,7 @@ import com.guruprasad.teacherattend.Department.computer;
 import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.adapter.student_adapter;
 import com.guruprasad.teacherattend.adapter.workbook_adapter;
+import com.guruprasad.teacherattend.model.combine_model;
 import com.guruprasad.teacherattend.model.student_model;
 
 public class workbook_submission_activity extends AppCompatActivity {
@@ -37,8 +38,8 @@ public class workbook_submission_activity extends AppCompatActivity {
             String department = intent.getStringExtra("sub_department");
             String subject= intent.getStringExtra("sub_subject");
 
-            FirebaseRecyclerOptions<student_model> options = new FirebaseRecyclerOptions.Builder<student_model>().setQuery(FirebaseDatabase.getInstance().
-                    getReference("Students").child(department).child(Year).child(division), student_model.class).build();
+            FirebaseRecyclerOptions<combine_model> options = new FirebaseRecyclerOptions.Builder<combine_model>().setQuery(FirebaseDatabase.getInstance().
+                    getReference("Students").child(department).child(Year).child(division), combine_model.class).build();
             adapter = new workbook_adapter(options ,subject);
             adapter.startListening();
             recyclerView.setAdapter(adapter);

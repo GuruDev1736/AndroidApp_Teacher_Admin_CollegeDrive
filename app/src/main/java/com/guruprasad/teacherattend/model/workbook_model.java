@@ -2,16 +2,21 @@ package com.guruprasad.teacherattend.model;
 
 public class workbook_model {
 
-    String name , department , year , division , assignment ;
-    Boolean status ;
+    String name , department , year , division , assignment_1 , assignment_2
+            , assignment_3 , assignment_4 , assignment_5
+            ,assignment_6 ;
 
-    public workbook_model(String name, String department, String year, String division, String assignment , Boolean status ) {
+    public workbook_model(String name, String department, String year, String division, String assignment_1, String assignment_2, String assignment_3, String assignment_4, String assignment_5, String assignment_6) {
         this.name = name;
         this.department = department;
         this.year = year;
         this.division = division;
-        this.assignment = assignment;
-        this.status = status;
+        this.assignment_1 = assignment_1;
+        this.assignment_2 = assignment_2;
+        this.assignment_3 = assignment_3;
+        this.assignment_4 = assignment_4;
+        this.assignment_5 = assignment_5;
+        this.assignment_6 = assignment_6;
     }
 
     public workbook_model() {
@@ -50,19 +55,51 @@ public class workbook_model {
         this.division = division;
     }
 
-    public String getAssignment() {
-        return assignment;
+    public String getAssignment_1() {
+        return assignment_1;
     }
 
-    public void setAssignment(String assignment) {
-        this.assignment = assignment;
+    public void setAssignment_1(String assignment_1) {
+        this.assignment_1 = assignment_1;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public String getAssignment_2() {
+        return assignment_2;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setAssignment_2(String assignment_2) {
+        this.assignment_2 = assignment_2;
+    }
+
+    public String getAssignment_3() {
+        return assignment_3;
+    }
+
+    public void setAssignment_3(String assignment_3) {
+        this.assignment_3 = assignment_3;
+    }
+
+    public String getAssignment_4() {
+        return assignment_4;
+    }
+
+    public void setAssignment_4(String assignment_4) {
+        this.assignment_4 = assignment_4;
+    }
+
+    public String getAssignment_5() {
+        return assignment_5;
+    }
+
+    public void setAssignment_5(String assignment_5) {
+        this.assignment_5 = assignment_5;
+    }
+
+    public String getAssignment_6() {
+        return assignment_6;
+    }
+
+    public void setAssignment_6(String assignment_6) {
+        this.assignment_6 = assignment_6;
     }
 }

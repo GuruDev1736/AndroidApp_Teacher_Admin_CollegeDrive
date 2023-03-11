@@ -5,14 +5,17 @@ import static android.content.Intent.getIntent;
 import static com.guruprasad.teacherattend.Constants.error_toast;
 import static com.guruprasad.teacherattend.Constants.success_toast;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +23,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,14 +36,24 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.attendance_student;
 import com.guruprasad.teacherattend.model.attendance_model;
 import com.guruprasad.teacherattend.model.student_model;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -46,6 +61,9 @@ import java.util.Locale;
 public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,attendance_adapter.onviewholder> {
     private String myValue;
     private String sub_no;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference reference = database.getReference("Students");
     public attendance_adapter(@NonNull FirebaseRecyclerOptions<student_model> options , String value , String subject_no ) {
         super(options);
         this.myValue = value;
@@ -63,7 +81,6 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
         holder.year.setText("Year : "+model.getYear());
         holder.Phone.setText("Phone No : "+model.getStud_no());
         String key = holder.databaseReference.push().getKey();
-
 
 
 
@@ -115,6 +132,7 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
         });
 
         holder.absent.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
 
@@ -128,11 +146,41 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                 pd.setCanceledOnTouchOutside(false);
                 pd.show();
 
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                String timeString = sdf.format(Calendar.getInstance().getTime());
 
                 String date = null;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                 }
+
+
+                Dexter.withContext(view.getContext()).withPermission(Manifest.permission.SEND_SMS).withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        String phoneNumber ="8830861403";
+                        String message = "Dear Parents , Kindly take a note that your child is absent for today's lecture ";
+
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+
+                        success_toast(view.getContext(),"SMS sent");
+
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+                            error_toast(view.getContext(),"Permission Denied...");
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                            permissionToken.continuePermissionRequest();
+                    }
+                }).check();
+
+
+
 
                 attendance_model attendance_model = new attendance_model(model.getStud_name(),model.getDepartment(),model.getStud_no(),model.getDivision()
                         ,model.getYear(),attendance,date,key);

@@ -4,6 +4,9 @@ import static com.guruprasad.teacherattend.Constants.error_toast;
 import static com.guruprasad.teacherattend.Constants.success_toast;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,22 +24,24 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.guruprasad.teacherattend.R;
+import com.guruprasad.teacherattend.model.combine_model;
 import com.guruprasad.teacherattend.model.student_model;
 import com.guruprasad.teacherattend.model.workbook_model;
+import com.guruprasad.teacherattend.submission.view_workbook;
 
 import org.w3c.dom.Text;
 
-public class workbook_adapter extends FirebaseRecyclerAdapter<student_model,workbook_adapter.viewholder> {
+public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,workbook_adapter.viewholder> {
 
     private String sub ;
 
-    public workbook_adapter(@NonNull FirebaseRecyclerOptions<student_model> options , String subject) {
+    public workbook_adapter(@NonNull FirebaseRecyclerOptions<combine_model> options , String subject) {
         super(options);
         this.sub = subject;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull viewholder holder, int position, @NonNull student_model model) {
+    protected void onBindViewHolder(@NonNull viewholder holder, int position, @NonNull combine_model model) {
 
         ProgressDialog pd = new ProgressDialog(holder.itemView.getContext());
         pd.setTitle("Marking As Submit");
@@ -46,34 +51,45 @@ public class workbook_adapter extends FirebaseRecyclerAdapter<student_model,work
 
 
         holder.name.setText(model.getStud_name());
-
-        holder.a1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                pd.show();
-
-                workbook_model model1 = new workbook_model(model.getStud_name(),model.getDepartment(),model.getYear()
-                        ,model.getDivision(),"Completed",true);
-
-                holder.databaseReference.child(model.getDepartment()).child(model.getYear())
-                        .child(model.getDivision()).child(sub).
-                        child(holder.databaseReference.push().getKey()).setValue(model1)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                pd.dismiss();
-                                success_toast(holder.a1.getContext(), "Assignment Successfully Updated");
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                pd.dismiss();
-                                error_toast(holder.a1.getContext(), "Assignment Failed to Updated"+e.getMessage());
-
-                            }
-                        });
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), view_workbook.class);
+                holder.itemView.getContext().startActivity(intent);
             }
         });
+
+
+
+
+//
+//        holder.a1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                pd.show();
+//
+//                workbook_model model1 = new workbook_model(model.getStud_name(),model.getDepartment(),model.getYear()
+//                        ,model.getDivision(),"Completed",null,null,null,null,null);
+//
+//                holder.databaseReference.child(model.getDepartment()).child(model.getYear())
+//                        .child(model.getDivision()).child(sub).
+//                        child(holder.databaseReference.push().getKey()).setValue(model1)
+//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void unused) {
+//                                pd.dismiss();
+//                                success_toast(holder.a1.getContext(), "Assignment Successfully Updated");
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                pd.dismiss();
+//                                error_toast(holder.a1.getContext(), "Assignment Failed to Updated"+e.getMessage());
+//
+//                            }
+//                        });
+//            }
+//        });
 
 
     }
@@ -90,8 +106,8 @@ public class workbook_adapter extends FirebaseRecyclerAdapter<student_model,work
 
     public class viewholder extends RecyclerView.ViewHolder {
 
-        TextView name ;
-        CheckBox a1 ,a2 ,a3 ,a4,a5 ,a6 ;
+        TextView name , view ;
+
         DatabaseReference databaseReference ;
         FirebaseDatabase database;
 
@@ -101,12 +117,7 @@ public class workbook_adapter extends FirebaseRecyclerAdapter<student_model,work
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
-            a1 = itemView.findViewById(R.id.a1);
-            a2 = itemView.findViewById(R.id.a2);
-            a3 = itemView.findViewById(R.id.a3);
-            a4 = itemView.findViewById(R.id.a4);
-            a5 = itemView.findViewById(R.id.a5);
-            a6 = itemView.findViewById(R.id.a6);
+            view = itemView.findViewById(R.id.view_workbook);
             database = FirebaseDatabase.getInstance();
             databaseReference = database.getReference("Submission");
 
