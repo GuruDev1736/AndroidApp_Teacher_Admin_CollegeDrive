@@ -29,6 +29,7 @@ public class computer extends AppCompatActivity implements AdapterView.OnItemSel
     RecyclerView recyclerView ;
     student_adapter adapter ;
     Button button ;
+    ProgressBar progressBar ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class computer extends AppCompatActivity implements AdapterView.OnItemSel
         div = findViewById(R.id.div_spinner);
         recyclerView = findViewById(R.id.comp_rec);
         button = findViewById(R.id.submit);
+
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.year, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
@@ -56,11 +58,13 @@ public class computer extends AppCompatActivity implements AdapterView.OnItemSel
 
                 display_student();
                 info_toast(getApplicationContext(),"Please Wait Fetching the data");
+
             }
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(computer.this));
     }
+
 
     @Override
     public void onBackPressed() {
@@ -88,5 +92,8 @@ public class computer extends AppCompatActivity implements AdapterView.OnItemSel
             adapter.startListening();
             recyclerView.setAdapter(adapter);
 
+
+
     }
+
 }

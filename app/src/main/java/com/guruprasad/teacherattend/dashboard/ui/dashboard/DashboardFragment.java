@@ -76,19 +76,144 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
 
 
         String department = binding.spinnerAttendanceDepartment.getSelectedItem().toString();
+        String year= binding.spinnerAttendanceYear.getSelectedItem().toString();
 
         binding.getSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (department.equals("Computer"))
+                if (department.equals("Computer") && year.equals("First Year"))
                 {
-                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.computer_subjects, android.R.layout.simple_spinner_item);
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.first_comp, android.R.layout.simple_spinner_item);
                     sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
                     binding.spinnerAttendanceSubject.setAdapter(sub);
-                    //binding.spinnerAttendanceSubject.setOnItemSelectedListener(this);
+
                 }
 
+                if (department.equals("Computer") && year.equals("Second Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.second_comp, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
 
+                }
+
+                if (department.equals("Computer") && year.equals("Third Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.third_comp, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+
+                if (department.equals("Mechanical") && year.equals("First Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.first_mech, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+
+                 if (department.equals("Mechanical") && year.equals("Second Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.second_mech, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+
+                 if (department.equals("Mechanical") && year.equals("Third Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.third_mech, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+
+                 if (department.equals("Civil") && year.equals("First Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.first_civil, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+
+                 if (department.equals("Civil") && year.equals("Second Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.second_civil, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+                 if (department.equals("Civil") && year.equals("Third Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.third_civil, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+                   if (department.equals("E amd TC") && year.equals("First Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.first_E_and_TC, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+                   if (department.equals("E amd TC") && year.equals("Second Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.second_E_and_TC, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+                   if (department.equals("E amd TC") && year.equals("Third Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.third_E_and_TC, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+                   if (department.equals("IT") && year.equals("First Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.first_IT, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+                   if (department.equals("IT") && year.equals("Second Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.second_IT, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+                   if (department.equals("IT") && year.equals("Third Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.third_IT, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+                   if (department.equals("Pharmacy") && year.equals("First Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.first_pharmacy, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+                   if (department.equals("Pharmacy") && year.equals("Second Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.second_pharmacy, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
+                   if (department.equals("Pharmacy") && year.equals("Third Year"))
+                {
+                    ArrayAdapter<CharSequence> sub = ArrayAdapter.createFromResource(binding.getRoot().getContext(), R.array.third_pharmacy, android.R.layout.simple_spinner_item);
+                    sub.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
+                    binding.spinnerAttendanceSubject.setAdapter(sub);
+
+                }
 
 
 

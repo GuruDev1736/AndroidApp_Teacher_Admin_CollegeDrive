@@ -158,7 +158,7 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                 Dexter.withContext(view.getContext()).withPermission(Manifest.permission.SEND_SMS).withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        String phoneNumber ="8830861403";
+                        String phoneNumber =model.getParent_no();
                         String message = "Dear Parents , Kindly take a note that your child is absent for today's lecture ";
 
                         SmsManager smsManager = SmsManager.getDefault();

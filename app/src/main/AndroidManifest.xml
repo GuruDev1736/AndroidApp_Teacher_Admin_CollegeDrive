@@ -16,6 +16,18 @@
         android:theme="@style/Theme.TeacherAttend"
         tools:targetApi="31">
         <activity
+            android:name=".submission.view_micro_porject"
+            android:exported="false" />
+        <activity
+            android:name=".submission.micro_project_submission_activity"
+            android:exported="false" />
+        <activity
+            android:name=".submission.view_assignment"
+            android:exported="false" />
+        <activity
+            android:name=".submission.assignment_submission_activity"
+            android:exported="false" />
+        <activity
             android:name=".submission.view_workbook"
             android:exported="false" />
         <activity
@@ -36,48 +48,6 @@
         <activity
             android:name=".attendance_student"
             android:exported="false" />
-        <activity
-            android:name=".Attendance.Pharmacy"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Attendance.E_and_TC"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Attendance.IT"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Attendance.Civil"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Attendance.Mechanical"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Attendance.Computer"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
         <activity
             android:name=".student_profile"
             android:exported="false">

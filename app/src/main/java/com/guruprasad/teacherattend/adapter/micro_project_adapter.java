@@ -15,13 +15,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.model.combine_model;
+import com.guruprasad.teacherattend.submission.view_micro_porject;
 import com.guruprasad.teacherattend.submission.view_workbook;
 
-public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,workbook_adapter.viewholder> {
+public class micro_project_adapter extends FirebaseRecyclerAdapter<combine_model,micro_project_adapter.viewholder> {
 
     private String sub ;
 
-    public workbook_adapter(@NonNull FirebaseRecyclerOptions<combine_model> options , String subject) {
+    public micro_project_adapter(@NonNull FirebaseRecyclerOptions<combine_model> options , String subject) {
         super(options);
         this.sub = subject;
     }
@@ -33,7 +34,7 @@ public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,work
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), view_workbook.class);
+                Intent intent = new Intent(view.getContext(), view_micro_porject.class);
                 intent.putExtra("name",model.getStud_name());
                 intent.putExtra("depart",model.getDepartment());
                 intent.putExtra("year",model.getYear());
@@ -50,7 +51,7 @@ public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,work
     @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.table_submission,parent,false);
-        return new workbook_adapter.viewholder(view);
+        return new micro_project_adapter.viewholder(view);
     }
 
 
@@ -60,18 +61,11 @@ public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,work
 
         TextView name , view ;
 
-        DatabaseReference databaseReference ;
-        FirebaseDatabase database;
-
-
-
         public viewholder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
             view = itemView.findViewById(R.id.view_workbook);
-            database = FirebaseDatabase.getInstance();
-            databaseReference = database.getReference("Submission");
 
         }
     }

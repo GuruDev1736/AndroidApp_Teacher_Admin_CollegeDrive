@@ -2,6 +2,8 @@ package com.guruprasad.teacherattend.adapter;
 
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +21,14 @@ import com.guruprasad.teacherattend.model.student_model;
 import com.guruprasad.teacherattend.student_profile;
 
 public class student_adapter extends FirebaseRecyclerAdapter<student_model,student_adapter.onviewholder> {
+    Context context ;
 
     public student_adapter(@NonNull FirebaseRecyclerOptions<student_model> options) {
         super(options);
     }
+
+
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -54,6 +60,8 @@ public class student_adapter extends FirebaseRecyclerAdapter<student_model,stude
 
 
     }
+
+
 
     @NonNull
     @Override
