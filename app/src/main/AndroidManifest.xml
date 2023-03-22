@@ -16,6 +16,21 @@
         android:theme="@style/Theme.TeacherAttend"
         tools:targetApi="31">
         <activity
+            android:name=".Attendance.ShowAttendance"
+            android:exported="false" />
+        <activity
+            android:name=".Attendance.StudentDisplayAttendance"
+            android:exported="false" />
+        <activity
+            android:name=".Attendance.AttendanceRecord"
+            android:exported="false" />
+        <activity
+            android:name=".submission.view_lab_manual"
+            android:exported="false" />
+        <activity
+            android:name=".submission.lab_manual_submission_activity"
+            android:exported="false" />
+        <activity
             android:name=".submission.view_micro_porject"
             android:exported="false" />
         <activity

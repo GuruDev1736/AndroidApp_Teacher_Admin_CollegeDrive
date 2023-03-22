@@ -4,6 +4,7 @@ import static com.guruprasad.teacherattend.Constants.error_toast;
 import static com.guruprasad.teacherattend.Constants.info_toast;
 import static com.guruprasad.teacherattend.Constants.success_toast;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,7 +30,8 @@ public class computer extends AppCompatActivity implements AdapterView.OnItemSel
     RecyclerView recyclerView ;
     student_adapter adapter ;
     Button button ;
-    ProgressBar progressBar ;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,11 +88,15 @@ public class computer extends AppCompatActivity implements AdapterView.OnItemSel
         String Year  =year.getSelectedItem().toString();
         String division = div.getSelectedItem().toString();
 
+
+
             FirebaseRecyclerOptions<student_model> options = new FirebaseRecyclerOptions.Builder<student_model>().setQuery(FirebaseDatabase.getInstance().
                     getReference("Students").child("Computer").child(Year).child(division), student_model.class).build();
+
             adapter = new student_adapter(options);
             adapter.startListening();
             recyclerView.setAdapter(adapter);
+
 
 
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".submission.lab_manual">
+    tools:context=".Attendance.AttendanceRecord">
 
     <RelativeLayout
         android:id="@+id/spinner_layout"
@@ -77,56 +77,6 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/spinner_layout_subject"
-        android:layout_width="match_parent"
-        android:layout_height="50sp"
-        android:layout_below="@+id/spinner_layout_department"
-        android:layout_alignStart="@+id/spinner_layout_department"
-        android:layout_alignEnd="@+id/spinner_layout_department"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="100dp"
-        android:background="@drawable/spinner_border"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinner_attendance_subject"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:spinnerMode="dropdown"
-            android:tooltipText="Select Department"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginEnd="20dp"
-            android:contentDescription="TODO"
-            android:src="@drawable/ic_baseline_arrow_drop_down_24" />
-
-    </RelativeLayout>
-
-    <ImageButton
-        android:id="@+id/get_sub"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@+id/spinner_layout_subject"
-        android:layout_alignEnd="@+id/spinner_layout_department"
-        android:layout_alignBottom="@+id/spinner_layout_subject"
-        android:layout_marginBottom="0dp"
-        android:background="@color/blue_app"
-        android:clickable="true"
-        android:focusable="true"
-        android:padding="5dp"
-        android:src="@drawable/baseline_get_app_24" />
-
-
 
     <RelativeLayout
         android:id="@+id/spinner_layout_department"
@@ -164,10 +114,10 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/submit_labmanual"
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner_layout_subject"
+        android:layout_below="@+id/spinner_layout_department"
         android:layout_alignStart="@+id/spinner_layout_department"
         android:layout_alignEnd="@+id/spinner_layout_department"
         android:layout_marginTop="20dp"

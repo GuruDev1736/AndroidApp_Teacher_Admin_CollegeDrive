@@ -29,6 +29,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 
@@ -51,7 +52,7 @@ dependencies {
 
     implementation 'com.github.GrenderG:Toasty:1.5.2'
 
-    implementation 'com.google.android.material:material:1.9.0-alpha02'
+    implementation 'com.google.android.material:material:1.9.0-beta01'
     implementation platform('com.google.firebase:firebase-bom:31.2.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.karumi:dexter:6.2.3'
@@ -60,7 +61,7 @@ dependencies {
 
     implementation 'com.github.aabhasr1:OtpView:v1.1.2'
 
-    implementation 'com.google.android.material:material:1.9.0-alpha02'
+    implementation 'com.google.android.material:material:1.9.0-beta01'
     implementation 'com.github.travijuu:numberpicker:1.0.7'
 
     implementation 'com.google.android.material:material:1.8.0'

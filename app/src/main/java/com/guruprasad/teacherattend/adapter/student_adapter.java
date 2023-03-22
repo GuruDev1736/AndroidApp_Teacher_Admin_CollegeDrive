@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,16 +24,18 @@ import com.guruprasad.teacherattend.student_profile;
 public class student_adapter extends FirebaseRecyclerAdapter<student_model,student_adapter.onviewholder> {
     Context context ;
 
+
+
+
     public student_adapter(@NonNull FirebaseRecyclerOptions<student_model> options) {
         super(options);
     }
 
-
-
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onBindViewHolder(@NonNull onviewholder holder, int position, @NonNull student_model model) {
+
+
 
         holder.name.setText("Name: "+model.getStud_name());
         holder.department.setText("Department : "+model.getDepartment());
@@ -76,6 +79,8 @@ public class student_adapter extends FirebaseRecyclerAdapter<student_model,stude
         TextView name , department , year  , Phone ;
         CardView cardView ;
 
+
+
         public onviewholder(@NonNull View itemView) {
             super(itemView);
 
@@ -86,5 +91,6 @@ public class student_adapter extends FirebaseRecyclerAdapter<student_model,stude
             cardView = itemView.findViewById(R.id.cardview);
         }
     }
+
 }
 

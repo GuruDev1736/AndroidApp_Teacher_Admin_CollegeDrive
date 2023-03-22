@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".submission.view_micro_porject">
+    tools:context=".submission.view_lab_manual">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -153,7 +153,7 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:padding="5dp"
-                android:text="MicroProject "
+                android:text="Lab Manual"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -169,23 +169,23 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="15dp"
-                android:hint="MicroProject Name "
+                android:hint="Subject Name "
                 app:boxStrokeColor="#448AFF"
                 app:endIconMode="clear_text"
                 app:endIconTint="#6A6767"
                 app:hintTextColor="#448AFF">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/micro_project_name"
+                    android:id="@+id/subject_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:maxLength="15"
+                    android:text=""
                     android:textCursorDrawable="@drawable/black_cursor" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
-  <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/marks_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="200dp"
@@ -193,7 +193,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="15dp"
-                android:hint="MicroProject Marks "
+                android:hint="Average Marks "
                 android:layout_below="@+id/micro_project_name_layout"
                 app:boxStrokeColor="#448AFF"
                 app:endIconMode="clear_text"
@@ -201,7 +201,7 @@
                 app:hintTextColor="#448AFF">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/micro_project_marks"
+                    android:id="@+id/lab_manual_marks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
@@ -225,7 +225,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/submit_micro_project"
+                android:id="@+id/submit_lab_manual"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/marks_layout"

@@ -13,17 +13,19 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.guruprasad.teacherattend.Attendance.ShowAttendance;
 import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.model.combine_model;
+import com.guruprasad.teacherattend.submission.view_lab_manual;
 import com.guruprasad.teacherattend.submission.view_workbook;
 
-public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,workbook_adapter.viewholder> {
+public class AttendanceRecordAdapter extends FirebaseRecyclerAdapter<combine_model,AttendanceRecordAdapter.viewholder> {
 
-    private String sub ;
 
-    public workbook_adapter(@NonNull FirebaseRecyclerOptions<combine_model> options , String subject) {
+
+    public AttendanceRecordAdapter(@NonNull FirebaseRecyclerOptions<combine_model> options) {
         super(options);
-        this.sub = subject;
+
     }
 
     @Override
@@ -33,12 +35,11 @@ public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,work
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), view_workbook.class);
-                intent.putExtra("name",model.getStud_name());
-                intent.putExtra("depart",model.getDepartment());
+                Intent intent = new Intent(view.getContext(), ShowAttendance.class);
+                intent.putExtra("department",model.getDepartment());
                 intent.putExtra("year",model.getYear());
-                intent.putExtra("div",model.getDivision());
-                intent.putExtra("sub",sub);
+                intent.putExtra("division", model.getDivision());
+                intent.putExtra("name",model.getStud_name());
                 holder.itemView.getContext().startActivity(intent);
             }
         });
@@ -50,7 +51,7 @@ public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,work
     @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.table_submission,parent,false);
-        return new workbook_adapter.viewholder(view);
+        return new AttendanceRecordAdapter.viewholder(view);
     }
 
 
@@ -59,7 +60,6 @@ public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,work
     public class viewholder extends RecyclerView.ViewHolder {
 
         TextView name , view ;
-
 
 
 

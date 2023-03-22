@@ -15,13 +15,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.model.combine_model;
+import com.guruprasad.teacherattend.submission.view_lab_manual;
 import com.guruprasad.teacherattend.submission.view_workbook;
 
-public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,workbook_adapter.viewholder> {
+public class lab_manual_adapter extends FirebaseRecyclerAdapter<combine_model,lab_manual_adapter.viewholder> {
 
     private String sub ;
 
-    public workbook_adapter(@NonNull FirebaseRecyclerOptions<combine_model> options , String subject) {
+    public lab_manual_adapter(@NonNull FirebaseRecyclerOptions<combine_model> options , String subject) {
         super(options);
         this.sub = subject;
     }
@@ -33,7 +34,7 @@ public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,work
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), view_workbook.class);
+                Intent intent = new Intent(view.getContext(), view_lab_manual.class);
                 intent.putExtra("name",model.getStud_name());
                 intent.putExtra("depart",model.getDepartment());
                 intent.putExtra("year",model.getYear());
@@ -50,7 +51,7 @@ public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,work
     @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.table_submission,parent,false);
-        return new workbook_adapter.viewholder(view);
+        return new lab_manual_adapter.viewholder(view);
     }
 
 
@@ -59,7 +60,6 @@ public class workbook_adapter extends FirebaseRecyclerAdapter<combine_model,work
     public class viewholder extends RecyclerView.ViewHolder {
 
         TextView name , view ;
-
 
 
 

@@ -108,9 +108,8 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                 attendance_model attendance_model = new attendance_model(model.getStud_name(),model.getDepartment(),model.getStud_no(),model.getDivision()
                 ,model.getYear(),attendance,date,key);
 
-                holder.databaseReference.child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision()).child(myValue)
-                        .child("Lecture No : "+sub_no)
-                        .child(key)
+                holder.databaseReference.child(model.getDepartment()).child(model.getYear()).child(model.getDivision()).child(myValue)
+                        .child("Lecture No : "+sub_no).child(model.getStud_name())
                         .setValue(attendance_model).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
@@ -185,8 +184,8 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                 attendance_model attendance_model = new attendance_model(model.getStud_name(),model.getDepartment(),model.getStud_no(),model.getDivision()
                         ,model.getYear(),attendance,date,key);
 
-                holder.databaseReference.child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision()).child(myValue)
-                        .child("Lecture No : "+sub_no) .child(key)
+                holder.databaseReference.child(model.getDepartment()).child(model.getYear()).child(model.getDivision()).child(myValue)
+                        .child("Lecture No : "+sub_no).child(model.getStud_name())
                         .setValue(attendance_model).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
@@ -221,12 +220,6 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
 
                                 holder.imageView.setBackgroundColor(Color.GREEN);
 
-
-                                String date = null;
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                    date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                                }
-
                                 String attendance = "Present" ;
 
                                 HashMap<String , Object> obj = new HashMap<>();
@@ -239,16 +232,16 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                                 pd.setCanceledOnTouchOutside(false);
 
                                 pd.show();
-                                holder.database.getReference().child("Attendance").child(date).child(model.getDepartment()).child(model.getYear()).child(model.getDivision())
-                                        .child(myValue).child("Lecture No : "+sub_no).child(key)
-                                        .updateChildren(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        success_toast(view.getContext(),"Attendance has been updated");
-                                        pd.dismiss();
-                                    }
-                                });
 
+                                                holder.database.getReference().child("Attendance").child(model.getDepartment()).child(model.getYear()).child(model.getDivision())
+                                                        .child(myValue).child("Lecture No : "+sub_no).child(model.getStud_name())
+                                                        .updateChildren(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                success_toast(view.getContext(),"Attendance has been updated");
+                                                                pd.dismiss();
+                                                            }
+                                                        });
 
                             }
                         })
@@ -257,11 +250,6 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                             public void onClick(DialogInterface dialogInterface, int i) {
 
                                 holder.imageView.setBackgroundColor(Color.RED);
-
-                                String date = null;
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                    date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                                }
 
                                 String attendance = "Absent" ;
                                 HashMap<String , Object> obj = new HashMap<>();
@@ -274,14 +262,18 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                                 pd.setCanceledOnTouchOutside(false);
 
                                 pd.show();
-                                holder.database.getReference().child("Attendance").child(date).child(model.getDepartment()).child(model.getYear())
-                                        .child(model.getDivision()).child(myValue).child("Lecture No : "+sub_no).child(key)
-                                        .updateChildren(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                success_toast(view.getContext(),"Attendance has been updated");
-                                                pd.dismiss();
-                                            }});
+
+
+
+                                                holder.database.getReference().child("Attendance").child(model.getDepartment()).child(model.getYear())
+                                                        .child(model.getDivision()).child(myValue).child("Lecture No : " + sub_no).child(model.getStud_name())
+                                                        .updateChildren(obj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                success_toast(view.getContext(), "Attendance has been updated");
+                                                                pd.dismiss();
+                                                            }
+                                                        });
                             }
                         })
                         .show();

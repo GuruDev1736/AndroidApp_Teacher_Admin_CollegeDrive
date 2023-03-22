@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 
+import com.guruprasad.teacherattend.Attendance.AttendanceRecord;
 import com.guruprasad.teacherattend.databinding.FragmentNotificationsBinding;
 import com.guruprasad.teacherattend.submission.Assignment;
 import com.guruprasad.teacherattend.submission.lab_manual;
@@ -53,6 +54,13 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(view.getContext(), micro_project.class));
+            }
+        });
+
+        binding.attendanceRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(view.getContext(), AttendanceRecord.class));
             }
         });
 

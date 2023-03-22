@@ -23,16 +23,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.guruprasad.teacherattend.R;
+import com.guruprasad.teacherattend.model.view_lab_manual_model;
 import com.guruprasad.teacherattend.model.view_micro_project_model;
 
-import org.w3c.dom.Text;
-
-import java.security.ProtectionDomain;
-
-public class view_micro_porject extends AppCompatActivity {
+public class view_lab_manual extends AppCompatActivity {
 
     TextView name , department , year , division  ;
-    EditText micro_name , micro_marks ;
+
+    EditText sub_name , sub_marks ;
     TextView status ;
     Button submit ;
 
@@ -43,16 +41,18 @@ public class view_micro_porject extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_micro_porject);
+        setContentView(R.layout.activity_view_lab_manual);
 
         name = findViewById(R.id.name_student);
         department = findViewById(R.id.department_student);
         year = findViewById(R.id.year_student);
         division = findViewById(R.id.division_student);
-        micro_marks = findViewById(R.id.micro_project_marks);
-        micro_name = findViewById(R.id.micro_project_name);
+        submit = findViewById(R.id.submit_lab_manual);
+        sub_name = findViewById(R.id.subject_name);
+        sub_marks = findViewById(R.id.lab_manual_marks);
         status = findViewById(R.id.status);
-        submit = findViewById(R.id.submit_micro_project);
+
+
 
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Retriving Data");
@@ -73,16 +73,15 @@ public class view_micro_porject extends AppCompatActivity {
         year.setText(Year);
         division.setText(div);
 
-        reference.child("Micro_Project").child(depart).child(Year).child(div).child(sub).child(stud_name).addValueEventListener(new ValueEventListener() {
+        reference.child("Lab_Manual").child(depart).child(Year).child(div).child(sub).child(stud_name).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                view_micro_project_model model = snapshot.getValue(view_micro_project_model.class);
+                view_lab_manual_model model = snapshot.getValue(view_lab_manual_model.class);
 
                 if(model != null)
                 {
-                    micro_name.setText(model.getMicro_project_name());
-                    micro_marks.setText(model.getMicro_project_marks());
+                    sub_name.setText(model.getLab_manual_name());
+                    sub_marks.setText(model.getLab_manual_marks());
                     status.setText(model.getStatus());
 
                 }
@@ -97,6 +96,7 @@ public class view_micro_porject extends AppCompatActivity {
             }
         });
 
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,24 +107,24 @@ public class view_micro_porject extends AppCompatActivity {
                 pd.setCancelable(false);
                 pd.setCanceledOnTouchOutside(false);
 
-                String name = micro_name.getText().toString();
-                String marks = micro_marks.getText().toString();
+                String name = sub_name.getText().toString();
+                String marks = sub_marks.getText().toString();
 
                 if (TextUtils.isEmpty(name))
                 {
-                    micro_name.setError("Name Required");
+                    sub_name.setError("Name Required");
                     return;
                 }
                 if (TextUtils.isEmpty(marks))
                 {
-                    micro_marks.setError("Marks Required");
+                    sub_marks.setError("Marks Required");
                     return;
                 }
 
                 pd.show();
 
-                view_micro_project_model model = new view_micro_project_model(name,marks,"Completed");
-                reference.child("Micro_Project").child(depart).child(Year).child(div).child(sub).child(stud_name)
+                view_lab_manual_model model = new view_lab_manual_model(name,marks,"Completed");
+                reference.child("Lab_Manual").child(depart).child(Year).child(div).child(sub).child(stud_name)
                         .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
