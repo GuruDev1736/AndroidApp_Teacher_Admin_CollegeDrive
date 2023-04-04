@@ -19,9 +19,6 @@
             android:name=".Attendance.ShowAttendance"
             android:exported="false" />
         <activity
-            android:name=".Attendance.StudentDisplayAttendance"
-            android:exported="false" />
-        <activity
             android:name=".Attendance.AttendanceRecord"
             android:exported="false" />
         <activity

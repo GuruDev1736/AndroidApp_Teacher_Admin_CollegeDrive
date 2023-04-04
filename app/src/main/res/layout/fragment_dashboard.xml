@@ -180,27 +180,41 @@
         app:value="-5" />
 
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/date_picker"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/number_picker"
         android:layout_alignStart="@+id/spinner_layout_subject"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/blue_app"
+        android:padding="5dp"
+        android:src="@drawable/ic_outline_calendar_month_24" />
+
+    <TextView
+        android:id="@+id/date_attend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/date_picker"
         android:layout_alignEnd="@+id/number_picker"
-        android:layout_marginTop="20dp"
-        android:gravity="center|center_horizontal|center_vertical"
-        android:text="date"
+        android:layout_alignBottom="@+id/date_picker"
+        android:layout_marginStart="20dp"
+
+        android:layout_toEndOf="@+id/date_picker"
+        android:gravity="center"
+        android:text="DATE"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
+
 
     <Button
         android:id="@+id/submit_attendance"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/date"
-        android:layout_alignStart="@+id/date"
-        android:layout_alignEnd="@+id/date"
+        android:layout_below="@+id/date_attend"
+        android:layout_alignStart="@+id/date_picker"
+        android:layout_alignEnd="@+id/date_attend"
         android:layout_marginTop="20dp"
         android:text="Submit"
         android:textColor="@color/white"

@@ -2,12 +2,12 @@ package com.guruprasad.teacherattend.model;
 
 public class combine_model {
 
-    String stud_name , parent_no , stud_no , department , year , division ,stud_email ;
+    String stud_name , parent_no , stud_no , department , year , division ,stud_email , stud_enroll;
     String name , department_ , year_ , division_ , assignment_1 , assignment_2
             , assignment_3 , assignment_4 , assignment_5
             ,assignment_6 ;
 
-    public combine_model(String stud_name, String parent_no, String stud_no, String department, String year, String division, String stud_email, String name, String department_, String year_, String division_, String assignment_1, String assignment_2, String assignment_3, String assignment_4, String assignment_5, String assignment_6) {
+    public combine_model(String stud_name, String parent_no, String stud_no, String department, String year, String division, String stud_email, String stud_enroll, String name, String department_, String year_, String division_, String assignment_1, String assignment_2, String assignment_3, String assignment_4, String assignment_5, String assignment_6) {
         this.stud_name = stud_name;
         this.parent_no = parent_no;
         this.stud_no = stud_no;
@@ -15,6 +15,7 @@ public class combine_model {
         this.year = year;
         this.division = division;
         this.stud_email = stud_email;
+        this.stud_enroll = stud_enroll;
         this.name = name;
         this.department_ = department_;
         this.year_ = year_;
@@ -84,6 +85,14 @@ public class combine_model {
 
     public void setStud_email(String stud_email) {
         this.stud_email = stud_email;
+    }
+
+    public String getStud_enroll() {
+        return stud_enroll;
+    }
+
+    public void setStud_enroll(String stud_enroll) {
+        this.stud_enroll = stud_enroll;
     }
 
     public String getName() {

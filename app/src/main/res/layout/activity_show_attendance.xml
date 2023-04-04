@@ -3,99 +3,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".Attendance.ShowAttendance">
 
-    <RelativeLayout
-        android:id="@+id/spinner_layout"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/spinner_border"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/sub_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-
-            android:spinnerMode="dropdown"
-            android:tooltipText="Select Department"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginEnd="20dp"
-            android:contentDescription="TODO"
-            android:src="@drawable/ic_baseline_arrow_drop_down_24" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/spinner_div_layout"
-        android:layout_width="150dp"
-        android:layout_height="50sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_toEndOf="@+id/spinner_layout"
-        android:background="@drawable/spinner_border"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/sub_no_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:spinnerMode="dropdown"
-            android:tooltipText="Select Department"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginEnd="20dp"
-            android:contentDescription="TODO"
-            android:src="@drawable/ic_baseline_arrow_drop_down_24" />
-
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/submit"
+    <HorizontalScrollView
+        android:id="@+id/scroll_hor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner_div_layout"
-        android:layout_alignStart="@+id/spinner_layout"
-        android:layout_alignEnd="@+id/spinner_div_layout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="0dp"
-        android:text="Submit" />
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:padding="10dp"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/date_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/blue_app"
+                android:padding="10dp"
+                android:src="@drawable/ic_outline_calendar_month_24" />
+
+            <TextView
+                android:id="@+id/date_attend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/date_picker"
+                android:layout_alignBottom="@+id/date_picker"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/date_picker"
+                android:gravity="center"
+                android:text="DATE"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/spinner_layout_subject"
+                android:layout_width="200dp"
+                android:layout_height="50sp"
+                android:layout_alignTop="@+id/date_attend"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/date_attend"
+                android:background="@drawable/spinner_border"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner_attendance_subject"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown"
+                    android:tooltipText="Select Department"
+                    tools:ignore="SpeakableTextPresentCheck"
+                    tools:targetApi="o" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="20dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/submit_attend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/number_picker"
+                android:layout_alignStart="@+id/number_picker"
+                android:layout_alignEnd="@+id/spinner_layout_subject"
+                android:layout_marginTop="20dp"
+                android:text="Submit"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <com.travijuu.numberpicker.library.NumberPicker
+                android:id="@+id/number_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_layout_subject"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:focusable="true"
+                app:custom_layout="@layout/number_picker_layout"
+                app:max="10"
+                app:min="1"
+                app:unit="1"
+                app:value="-5" />
+        </RelativeLayout>
+    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/attend_rec"
+        android:id="@+id/show_attend"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/submit"
-        android:layout_marginTop="20dp" />
-
+        android:layout_below="@+id/scroll_hor"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp" />
 
 </RelativeLayout>

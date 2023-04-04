@@ -57,10 +57,12 @@ public class attendance_student extends AppCompatActivity {
 
 
 
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(attendance_student.this));
         FirebaseRecyclerOptions<student_model> options = new FirebaseRecyclerOptions.Builder<student_model>().setQuery(FirebaseDatabase.getInstance().
                 getReference("Students").child(department).child(year.getText().toString()).child(division.getText().toString()), student_model.class).build();
-        adapter = new attendance_adapter(options,sub,subject_no);
+        adapter = new attendance_adapter(options,sub,subject_no,intent.getStringExtra("date"));
         adapter.startListening();
         recyclerView.setAdapter(adapter);
 

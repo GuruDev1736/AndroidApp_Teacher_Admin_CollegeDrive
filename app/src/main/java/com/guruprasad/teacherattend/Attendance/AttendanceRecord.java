@@ -11,59 +11,57 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.guruprasad.teacherattend.R;
+import com.guruprasad.teacherattend.databinding.ActivityAttendanceRecordBinding;
 import com.guruprasad.teacherattend.submission.lab_manual_submission_activity;
 
 public class AttendanceRecord extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    Spinner y , division  , depart ;
-    Button submit ;
+
+    ActivityAttendanceRecordBinding binding ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_attendance_record);
+        binding = ActivityAttendanceRecordBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        y = findViewById(R.id.spinner_attendance_year);
-        division = findViewById(R.id.spinner_attendance_division);
-        depart = findViewById(R.id.spinner_attendance_department);
-
-        submit = findViewById(R.id.submit);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.year, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
-        y.setAdapter(adapter);
-        y.setOnItemSelectedListener(this);
+        binding.spinnerAttendanceYear.setAdapter(adapter);
+        binding.spinnerAttendanceYear.setOnItemSelectedListener(this);
 
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.division, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
-        division.setAdapter(adapter2);
-        division.setOnItemSelectedListener(this);
+        binding.spinnerAttendanceDivision.setAdapter(adapter2);
+        binding.spinnerAttendanceDivision.setOnItemSelectedListener(this);
 
         ArrayAdapter<CharSequence> dep = ArrayAdapter.createFromResource(this, R.array.department_type, android.R.layout.simple_spinner_item);
         dep.setDropDownViewResource(androidx.transition.R.layout.support_simple_spinner_dropdown_item);
-        depart.setAdapter(dep);
-        depart.setOnItemSelectedListener(this);
+        binding.spinnerAttendanceDepartment.setAdapter(dep);
+        binding.spinnerAttendanceDepartment.setOnItemSelectedListener(this);
 
-        submit.setOnClickListener(new View.OnClickListener() {
+        binding.submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String sub_year = y.getSelectedItem().toString();
-                String sub_div = division.getSelectedItem().toString();
-                String sub_department = depart.getSelectedItem().toString();
 
+                String department = binding.spinnerAttendanceDepartment.getSelectedItem().toString();
+                String year = binding.spinnerAttendanceYear.getSelectedItem().toString();
+                String division = binding.spinnerAttendanceDivision.getSelectedItem().toString();
 
-                Intent intent = new Intent(getApplicationContext(), StudentDisplayAttendance.class);
-                intent.putExtra("sub_year",sub_year);
-                intent.putExtra("sub_div",sub_div);
-                intent.putExtra("sub_department",sub_department);
+                Intent intent = new Intent(getApplicationContext(),ShowAttendance.class);
+                intent.putExtra("dep",department);
+                intent.putExtra("yea",year);
+                intent.putExtra("div",division);
                 startActivity(intent);
+
+
             }
         });
 
 
-    }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+
+
     }
 
     @Override

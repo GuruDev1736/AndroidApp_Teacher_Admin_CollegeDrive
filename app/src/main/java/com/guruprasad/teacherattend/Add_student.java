@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -21,13 +22,16 @@ import android.widget.Spinner;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.guruprasad.teacherattend.model.student_model;
 
 public class Add_student extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
-        EditText student_name , parent_no , student_no , student_email ;
+        EditText student_name , parent_no , student_no , student_email , student_enroll ;
         Spinner spinner ,year , division;
         Button button ;
         DatabaseReference databaseReference ;
@@ -46,7 +50,7 @@ public class Add_student extends AppCompatActivity implements AdapterView.OnItem
         year = findViewById(R.id.year);
         division = findViewById(R.id.division);
         button = findViewById(R.id.submit_student);
-
+        student_enroll = findViewById(R.id.student_enroll);
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Students");
 
@@ -78,6 +82,7 @@ public class Add_student extends AppCompatActivity implements AdapterView.OnItem
                 String department = spinner.getSelectedItem().toString();
                 String Year = year.getSelectedItem().toString();
                 String div = division.getSelectedItem().toString();
+                String enrollment = student_enroll.getText().toString();
 
                 if(TextUtils.isEmpty(name))
                 {
@@ -109,6 +114,11 @@ public class Add_student extends AppCompatActivity implements AdapterView.OnItem
                     student_email.setError("Email is Invalid");
                     return;
                 }
+                if (TextUtils.isEmpty(enrollment))
+                {
+                    student_enroll.setError("Enrollment No required");
+                    return;
+                }
 
 
                 ProgressDialog pd = new ProgressDialog(Add_student.this);
@@ -118,7 +128,7 @@ public class Add_student extends AppCompatActivity implements AdapterView.OnItem
                 pd.setCanceledOnTouchOutside(false);
                 pd.show();
 
-                student_model student_model = new student_model(name,parent_num,student_num,department,Year,div,stud_email);
+                student_model student_model = new student_model(name,parent_num,student_num,department,Year,div,stud_email,enrollment);
                 databaseReference.child(department).child(Year).child(div).child(databaseReference.push().getKey()).setValue(student_model)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -128,6 +138,7 @@ public class Add_student extends AppCompatActivity implements AdapterView.OnItem
                                 parent_no.setText(null);
                                 student_no.setText(null);
                                 student_email.setText(null);
+                                student_enroll.setText(null);
                                 pd.dismiss();
 
 

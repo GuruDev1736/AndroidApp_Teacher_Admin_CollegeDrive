@@ -274,12 +274,45 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/student_enroll_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/student_email_layout"
+                android:layout_alignStart="@+id/student_email_layout"
+                android:layout_alignEnd="@+id/student_email_layout"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="0dp"
+                android:hint="Student Enrollment no"
+                android:textColorHint="@color/black"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="#448AFF"
+                app:endIconMode="clear_text"
+                app:endIconTint="#6A6767"
+                app:hintEnabled="true"
+                app:hintTextColor="#448AFF">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/student_enroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textCursorDrawable="@drawable/black_cursor"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/submit_student"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/student_email_layout"
+                android:layout_below="@+id/student_enroll_layout"
                 android:layout_alignStart="@+id/student_email_layout"
                 android:layout_alignEnd="@+id/student_email_layout"
                 android:clickable="true"

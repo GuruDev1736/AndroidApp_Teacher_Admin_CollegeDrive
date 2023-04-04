@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Attendance.AttendanceRecord">
+    tools:context=".submission.lab_manual">
 
     <RelativeLayout
         android:id="@+id/spinner_layout"
@@ -76,7 +76,6 @@
             android:src="@drawable/ic_baseline_arrow_drop_down_24" />
 
     </RelativeLayout>
-
 
     <RelativeLayout
         android:id="@+id/spinner_layout_department"

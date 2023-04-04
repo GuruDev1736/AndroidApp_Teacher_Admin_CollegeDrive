@@ -2,9 +2,9 @@ package com.guruprasad.teacherattend.model;
 
 public class student_model {
 
-    String stud_name , parent_no , stud_no , department , year , division ,stud_email ;
+    String stud_name , parent_no , stud_no , department , year , division ,stud_email , stud_enroll ;
 
-    public student_model(String stud_name, String parent_no, String stud_no, String department, String year, String division, String stud_email) {
+    public student_model(String stud_name, String parent_no, String stud_no, String department, String year, String division, String stud_email, String stud_enroll) {
         this.stud_name = stud_name;
         this.parent_no = parent_no;
         this.stud_no = stud_no;
@@ -12,6 +12,7 @@ public class student_model {
         this.year = year;
         this.division = division;
         this.stud_email = stud_email;
+        this.stud_enroll = stud_enroll;
     }
 
     public student_model() {
@@ -71,6 +72,14 @@ public class student_model {
 
     public void setStud_email(String stud_email) {
         this.stud_email = stud_email;
+    }
+
+    public String getStud_enroll() {
+        return stud_enroll;
+    }
+
+    public void setStud_enroll(String stud_enroll) {
+        this.stud_enroll = stud_enroll;
     }
 }
 

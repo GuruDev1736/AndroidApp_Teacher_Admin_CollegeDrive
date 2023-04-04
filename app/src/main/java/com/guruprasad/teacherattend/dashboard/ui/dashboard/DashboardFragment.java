@@ -1,9 +1,10 @@
 package com.guruprasad.teacherattend.dashboard.ui.dashboard;
 
 import static com.guruprasad.teacherattend.Constants.error_toast;
+import static com.guruprasad.teacherattend.Constants.info_toast;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,12 +16,22 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.guruprasad.teacherattend.Attendance.ShowAttendance;
 import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.attendance_student;
 import com.guruprasad.teacherattend.databinding.FragmentDashboardBinding;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
+
+import es.dmoral.toasty.Toasty;
 
 public class DashboardFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -54,12 +65,53 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
         binding.spinnerAttendanceDepartment.setAdapter(dep);
         binding.spinnerAttendanceDepartment.setOnItemSelectedListener(this);
 
-        String Date = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        try {
+            CalendarConstraints.Builder calendarConstraintBuilder = new CalendarConstraints.Builder();
+            calendarConstraintBuilder.setValidator(DateValidatorPointBackward.now());
+
+            MaterialDatePicker.Builder materialDateBuilder = MaterialDatePicker.Builder.datePicker();
+            long today = MaterialDatePicker.todayInUtcMilliseconds();
+            materialDateBuilder.setSelection(today);
+            materialDateBuilder.setTitleText("SELECT ATTENDANCE DATE");
+
+            materialDateBuilder.setCalendarConstraints(calendarConstraintBuilder.build());
+            final MaterialDatePicker materialDatePicker = materialDateBuilder.build();
+
+            binding.datePicker.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    materialDatePicker.show(getActivity().getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
+                }
+            });
+
+            materialDatePicker.addOnPositiveButtonClickListener(
+                    new MaterialPickerOnPositiveButtonClickListener() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onPositiveButtonClick(Object selection) {
+
+                            Calendar calendar  = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+                            calendar.setTimeInMillis((Long) selection);
+                            java.text.SimpleDateFormat format = new SimpleDateFormat("dd MM yyyy");
+                            String formatteddate = format.format(calendar.getTime());
+
+
+                            binding.dateAttend.setText(formatteddate);
+
+                        }
+                    });
+
+            materialDatePicker.addOnNegativeButtonClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    info_toast(getContext(),"Date is required");
+                }
+            });
+
+        } catch (Exception e) {
+            Toasty.error(getContext(),"Error : "+e.getMessage(),Toasty.LENGTH_LONG,true).show();
         }
 
-        binding.date.setText(Date);
 
 
         return root;
@@ -229,9 +281,15 @@ public class DashboardFragment extends Fragment implements AdapterView.OnItemSel
                     @Override
                     public void onClick(View view) {
 
+                        if (binding.dateAttend.getText().toString().equals("DATE"))
+                        {
+                            error_toast(getContext(),"Date Required");
+                            return;
+                        }
+
                         String Year = binding.spinnerAttendanceYear.getSelectedItem().toString();
                         String div  = binding.spinnerAttendanceDivision.getSelectedItem().toString();
-                        String Date = binding.date.getText().toString();
+                        String Date = binding.dateAttend.getText().toString();
                         String sub = binding.spinnerAttendanceSubject.getSelectedItem().toString();
                         String dep = binding.spinnerAttendanceDepartment.getSelectedItem().toString();
                         String sub_no = String.valueOf(binding.numberPicker.getValue());

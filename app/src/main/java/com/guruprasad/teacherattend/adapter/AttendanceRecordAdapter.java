@@ -1,5 +1,6 @@
 package com.guruprasad.teacherattend.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,42 +16,36 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.guruprasad.teacherattend.Attendance.ShowAttendance;
 import com.guruprasad.teacherattend.R;
+import com.guruprasad.teacherattend.model.attendance_model;
 import com.guruprasad.teacherattend.model.combine_model;
 import com.guruprasad.teacherattend.submission.view_lab_manual;
 import com.guruprasad.teacherattend.submission.view_workbook;
 
-public class AttendanceRecordAdapter extends FirebaseRecyclerAdapter<combine_model,AttendanceRecordAdapter.viewholder> {
+public class AttendanceRecordAdapter extends FirebaseRecyclerAdapter<attendance_model,AttendanceRecordAdapter.viewholder> {
 
 
 
-    public AttendanceRecordAdapter(@NonNull FirebaseRecyclerOptions<combine_model> options) {
+    public AttendanceRecordAdapter(@NonNull FirebaseRecyclerOptions<attendance_model> options) {
         super(options);
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    protected void onBindViewHolder(@NonNull viewholder holder, int position, @NonNull combine_model model) {
+    protected void onBindViewHolder(@NonNull viewholder holder, int position, @NonNull attendance_model model) {
 
-        holder.name.setText(model.getStud_name());
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ShowAttendance.class);
-                intent.putExtra("department",model.getDepartment());
-                intent.putExtra("year",model.getYear());
-                intent.putExtra("division", model.getDivision());
-                intent.putExtra("name",model.getStud_name());
-                holder.itemView.getContext().startActivity(intent);
-            }
-        });
 
+            holder.name.setText("Name : "+model.getName());
+            holder.status.setText(model.getAttendance());
+            holder.phone_no.setText(model.getPhone_no());
+            holder.date.setText(model.getDate());
 
     }
 
     @NonNull
-    @Override
+                @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.table_submission,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.student_layout,parent,false);
         return new AttendanceRecordAdapter.viewholder(view);
     }
 
@@ -59,16 +54,16 @@ public class AttendanceRecordAdapter extends FirebaseRecyclerAdapter<combine_mod
 
     public class viewholder extends RecyclerView.ViewHolder {
 
-        TextView name , view ;
-
-
+        TextView name ,status , phone_no , date  ;
 
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
 
-            name = itemView.findViewById(R.id.name);
-            view = itemView.findViewById(R.id.view_workbook);
+            name = itemView.findViewById(R.id.stud_name);
+            status = itemView.findViewById(R.id.stud_department);
+            phone_no = itemView.findViewById(R.id.stud_year);
+            date = itemView.findViewById(R.id.stud_phone);
 
 
         }
