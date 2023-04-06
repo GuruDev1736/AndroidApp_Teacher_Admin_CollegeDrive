@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.guruprasad.teacherattend.model.student_model;
 
+import java.util.Objects;
+
 public class Add_student extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
         EditText student_name , parent_no , student_no , student_email , student_enroll ;
@@ -41,6 +44,10 @@ public class Add_student extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Add Student");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         student_name = findViewById(R.id.student_name);
         parent_no = findViewById(R.id.parent_no);

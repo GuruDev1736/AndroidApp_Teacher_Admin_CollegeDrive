@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -48,6 +49,10 @@ public class view_workbook extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_workbook);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Workbook Submission");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         name = findViewById(R.id.name_student);
         department = findViewById(R.id.department_student);
@@ -126,6 +131,42 @@ public class view_workbook extends AppCompatActivity {
                    marks_5_status.setText(model.getMarks_5());
                    marks_6_status.setText(model.getMarks_6());
 
+                   if (model.getWorkbook_1()!=null && model.getWorkbook_1().equals("Completed"))
+                   {
+                       done_1.setBackgroundTintList(colorStateList);
+                       done_1.setImageResource(R.drawable.baseline_done_24);
+                   }
+                   if (model.getWorkbook_2()!=null && model.getWorkbook_2().equals("Completed"))
+                   {
+                       done_2.setBackgroundTintList(colorStateList);
+                       done_2.setImageResource(R.drawable.baseline_done_24);
+
+                   }
+                   if (model.getWorkbook_3()!=null && model.getWorkbook_3().equals("Completed"))
+                   {
+                       done_3.setBackgroundTintList(colorStateList);
+                       done_3.setImageResource(R.drawable.baseline_done_24);
+
+                   }
+                   if (model.getWorkbook_4()!=null && model.getWorkbook_4().equals("Completed"))
+                   {
+                       done_4.setBackgroundTintList(colorStateList);
+                       done_4.setImageResource(R.drawable.baseline_done_24);
+
+                   }
+                   if (model.getWorkbook_5()!=null && model.getWorkbook_5().equals("Completed"))
+                   {
+                       done_5.setBackgroundTintList(colorStateList);
+                       done_5.setImageResource(R.drawable.baseline_done_24);
+
+                   }
+                   if (model.getWorkbook_6()!=null && model.getWorkbook_6().equals("Completed"))
+                   {
+                       done_6.setBackgroundTintList(colorStateList);
+                       done_6.setImageResource(R.drawable.baseline_done_24);
+
+                   }
+
                }
 
                progressDialog.dismiss();
@@ -152,6 +193,7 @@ public class view_workbook extends AppCompatActivity {
 
                 pd.show();
                 done_1.setBackgroundTintList(colorStateList);
+                done_1.setImageResource(R.drawable.baseline_done_24);
 
                 reference.child("Workbook").child(depart).child(Year).child(div).child(sub).child(stud_name).child("workbook_1").setValue(submit)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -190,6 +232,7 @@ public class view_workbook extends AppCompatActivity {
                 pd.show();
 
                 done_2.setBackgroundTintList(colorStateList);
+                done_2.setImageResource(R.drawable.baseline_done_24);
 
 
               reference.child("Workbook").child(depart).child(Year).child(div).child(sub).child(stud_name).child("workbook_2").setValue("Completed")
@@ -225,6 +268,7 @@ public class view_workbook extends AppCompatActivity {
                 pd.show();
 
                 done_3.setBackgroundTintList(colorStateList);
+                done_3.setImageResource(R.drawable.baseline_done_24);
 
 
                 reference.child("Workbook").child(depart).child(Year).child(div).child(sub).child(stud_name).child("workbook_3").setValue("Completed")
@@ -263,6 +307,7 @@ public class view_workbook extends AppCompatActivity {
                 pd.show();
 
                 done_4.setBackgroundTintList(colorStateList);
+                done_4.setImageResource(R.drawable.baseline_done_24);
 
 
                 reference.child("Workbook").child(depart).child(Year).child(div).child(sub).child(stud_name).child("workbook_4").setValue("Completed")
@@ -301,6 +346,7 @@ public class view_workbook extends AppCompatActivity {
                 pd.show();
 
                 done_5.setBackgroundTintList(colorStateList);
+                done_5.setImageResource(R.drawable.baseline_done_24);
 
 
                 reference.child("Workbook").child(depart).child(Year).child(div).child(sub).child(stud_name).child("workbook_5").setValue("Completed")
@@ -340,7 +386,7 @@ public class view_workbook extends AppCompatActivity {
                 pd.show();
 
                 done_6.setBackgroundTintList(colorStateList);
-
+                done_6.setImageResource(R.drawable.baseline_done_24);
 
                 reference.child("Workbook").child(depart).child(Year).child(div).child(sub).child(stud_name).child("workbook_6").setValue("Completed")
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

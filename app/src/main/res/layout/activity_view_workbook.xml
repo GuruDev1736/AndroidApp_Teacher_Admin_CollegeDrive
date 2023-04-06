@@ -248,10 +248,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
-                                android:backgroundTint="@color/darker_gray"
+                                android:backgroundTint="@color/red"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:src="@drawable/baseline_done_24" />
+                                android:src="@drawable/baseline_close_24" />
 
                             <View
                                 android:layout_width="0.5dp"
@@ -330,15 +330,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
-                                android:backgroundTint="@color/darker_gray"
+                                android:backgroundTint="@color/red"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:src="@drawable/baseline_done_24" />
+                                android:src="@drawable/baseline_close_24" />
 
                             <View
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
-                                android:layout_alignParentRight="true"
                                 android:background="@color/grey" />
 
 
@@ -411,15 +410,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
-                                android:backgroundTint="@color/darker_gray"
+                                android:backgroundTint="@color/red"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:src="@drawable/baseline_done_24" />
+                                android:src="@drawable/baseline_close_24" />
 
                             <View
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
-                                android:layout_alignParentRight="true"
                                 android:background="@color/grey" />
 
 
@@ -492,15 +490,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
-                                android:backgroundTint="@color/darker_gray"
+                                android:backgroundTint="@color/red"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:src="@drawable/baseline_done_24" />
+                                android:src="@drawable/baseline_close_24" />
 
                             <View
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
-                                android:layout_alignParentRight="true"
                                 android:background="@color/grey" />
 
 
@@ -573,15 +570,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
-                                android:backgroundTint="@color/darker_gray"
+                                android:backgroundTint="@color/red"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:src="@drawable/baseline_done_24" />
+                                android:src="@drawable/baseline_close_24" />
 
                             <View
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
-                                android:layout_alignParentRight="true"
                                 android:background="@color/grey" />
 
 
@@ -654,15 +650,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
-                                android:backgroundTint="@color/darker_gray"
+                                android:backgroundTint="@color/red"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:src="@drawable/baseline_done_24" />
+                                android:src="@drawable/baseline_close_24" />
 
                             <View
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
-                                android:layout_alignParentRight="true"
                                 android:background="@color/grey" />
                         </LinearLayout>
                     </LinearLayout>

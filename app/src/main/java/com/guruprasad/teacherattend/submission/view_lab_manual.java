@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.model.view_lab_manual_model;
 import com.guruprasad.teacherattend.model.view_micro_project_model;
+
+import java.util.Objects;
 
 public class view_lab_manual extends AppCompatActivity {
 
@@ -42,6 +45,10 @@ public class view_lab_manual extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_lab_manual);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Lab-Manual Submission ");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         name = findViewById(R.id.name_student);
         department = findViewById(R.id.department_student);

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
@@ -15,6 +16,8 @@ import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.adapter.assignment_adapter;
 import com.guruprasad.teacherattend.adapter.workbook_adapter;
 import com.guruprasad.teacherattend.model.combine_model;
+
+import java.util.Objects;
 
 public class assignment_submission_activity extends AppCompatActivity {
 
@@ -25,6 +28,10 @@ public class assignment_submission_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignment_submission);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Students");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         recyclerView = findViewById(R.id.assignment_rec);
 

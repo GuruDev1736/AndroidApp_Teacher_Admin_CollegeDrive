@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.guruprasad.teacherattend.R;
+
+import java.util.Objects;
 
 public class workbook extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner y , division , subject , depart ;
@@ -26,6 +29,10 @@ public class workbook extends AppCompatActivity implements AdapterView.OnItemSel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workbook);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Workbook Submission");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         y = findViewById(R.id.spinner_attendance_year);
         division = findViewById(R.id.spinner_attendance_division);

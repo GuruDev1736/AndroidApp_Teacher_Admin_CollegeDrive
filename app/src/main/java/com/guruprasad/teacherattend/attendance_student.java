@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -20,6 +21,8 @@ import com.guruprasad.teacherattend.model.student_model;
 
 import org.w3c.dom.Text;
 
+import java.util.Objects;
+
 public class attendance_student extends AppCompatActivity {
         TextView date , year , division , subject , sub_no   ;
         attendance_adapter adapter ;
@@ -32,6 +35,10 @@ public class attendance_student extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_student);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Student Attendance");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         date = findViewById(R.id.attendance_date);
         year = findViewById(R.id.attendance_year);

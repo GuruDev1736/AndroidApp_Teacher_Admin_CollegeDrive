@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +14,8 @@ import android.widget.Spinner;
 import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.databinding.ActivityAttendanceRecordBinding;
 import com.guruprasad.teacherattend.submission.lab_manual_submission_activity;
+
+import java.util.Objects;
 
 public class AttendanceRecord extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -23,6 +26,10 @@ public class AttendanceRecord extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         binding = ActivityAttendanceRecordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Student Attendance");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.year, android.R.layout.simple_spinner_item);

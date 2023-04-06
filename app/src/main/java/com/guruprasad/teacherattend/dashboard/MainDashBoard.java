@@ -3,6 +3,7 @@ package com.guruprasad.teacherattend.dashboard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -18,6 +19,8 @@ import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.dashboard.MainDashBoard;
 import com.guruprasad.teacherattend.databinding.ActivityMainDashBoardBinding;
 
+import java.util.Objects;
+
 public class MainDashBoard extends AppCompatActivity {
 
     private ActivityMainDashBoardBinding binding;
@@ -25,6 +28,8 @@ public class MainDashBoard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         binding = ActivityMainDashBoardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

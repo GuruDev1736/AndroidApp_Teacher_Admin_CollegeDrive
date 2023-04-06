@@ -1,6 +1,7 @@
 package com.guruprasad.teacherattend.adapter;
 
 
+import static android.content.Intent.ACTION_CALL;
 import static android.content.Intent.getIntent;
 import static com.guruprasad.teacherattend.Constants.error_toast;
 import static com.guruprasad.teacherattend.Constants.success_toast;
@@ -14,6 +15,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.Build;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
@@ -85,7 +87,14 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
         holder.Phone.setText("Phone No : "+model.getStud_no());
         String key = holder.databaseReference.push().getKey();
 
-
+        holder.call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ACTION_CALL);
+                intent.setData(Uri.parse("tel:"+model.getStud_no()));
+                view.getContext().startActivity(intent);
+            }
+        });
 
 
         holder.present.setOnClickListener(new View.OnClickListener() {
@@ -95,20 +104,12 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                 holder.imageView.setBackgroundColor(Color.GREEN);
                 String attendance = "Present";
 
-//                String date = null;
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//                    date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-//                }
-//
-
-
                 ProgressDialog pd = new ProgressDialog(view.getContext());
                 pd.setTitle("Marking Attendance");
                 pd.setMessage("Please Wait...");
                 pd.setCancelable(false);
                 pd.setCanceledOnTouchOutside(false);
                 pd.show();
-
 
                 attendance_model attendance_model = new attendance_model(model.getStud_name(),model.getDepartment(),model.getStud_no(),model.getDivision()
                 ,model.getYear(),attendance,date,key);
@@ -151,15 +152,6 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                 pd.setCanceledOnTouchOutside(false);
                 pd.show();
 
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                String timeString = sdf.format(Calendar.getInstance().getTime());
-
-//                String date = null;
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//                    date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-//                }
-
-
                 Dexter.withContext(view.getContext()).withPermission(Manifest.permission.SEND_SMS).withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
@@ -168,7 +160,6 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
 
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(phoneNumber, null, message, null, null);
-
                         success_toast(view.getContext(),"SMS sent");
 
                     }
@@ -183,8 +174,6 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                             permissionToken.continuePermissionRequest();
                     }
                 }).check();
-
-
 
 
                 attendance_model attendance_model = new attendance_model(model.getStud_name(),model.getDepartment(),model.getStud_no(),model.getDivision()
@@ -242,12 +231,6 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
 
                                 pd.show();
 
-//                                String date = null;
-//                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//                                    date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-//                                }
-
-
                                                 holder.database.getReference().child("Attendance").child(model.getDepartment()).child(model.getYear()).child(model.getDivision())
                                                         .child(date)
                                                         .child(myValue).child(sub_no)
@@ -279,12 +262,6 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                                 pd.setCanceledOnTouchOutside(false);
 
                                 pd.show();
-//
-//                                String date = null;
-//                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//                                    date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-//                                }
-
 
                                                 holder.database.getReference().child("Attendance").child(model.getDepartment()).child(model.getYear())
                                                         .child(model.getDivision()).child(date).child(myValue).child(sub_no).child(key)
@@ -320,7 +297,7 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
         TextView name , department , year  , Phone ;
         CardView cardView ;
         Button present , absent ;
-        ImageButton modify , face  ;
+        ImageButton modify , call  ;
         DatabaseReference databaseReference ;
         FirebaseDatabase database;
         ImageView imageView ;
@@ -340,6 +317,7 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
             databaseReference = database.getReference("Attendance");
             modify = itemView.findViewById(R.id.modify);
             imageView = itemView.findViewById(R.id.img1);
+            call = itemView.findViewById(R.id.call_stud);
 
         }
 

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -20,6 +21,8 @@ import com.guruprasad.teacherattend.adapter.workbook_adapter;
 import com.guruprasad.teacherattend.model.combine_model;
 import com.guruprasad.teacherattend.model.student_model;
 
+import java.util.Objects;
+
 public class workbook_submission_activity extends AppCompatActivity {
 
     workbook_adapter adapter ;
@@ -29,6 +32,10 @@ public class workbook_submission_activity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_workbook_submission);
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Students");
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
 
             recyclerView = findViewById(R.id.workbook_rec);
 

@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import com.guruprasad.teacherattend.model.view_micro_project_model;
 import org.w3c.dom.Text;
 
 import java.security.ProtectionDomain;
+import java.util.Objects;
 
 public class view_micro_porject extends AppCompatActivity {
 
@@ -44,6 +46,10 @@ public class view_micro_porject extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_micro_porject);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Micro-Project Submission ");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         name = findViewById(R.id.name_student);
         department = findViewById(R.id.department_student);

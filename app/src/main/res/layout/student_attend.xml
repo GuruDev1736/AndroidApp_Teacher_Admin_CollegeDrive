@@ -5,12 +5,11 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="25dp"
-    android:padding="15dp"
     android:clickable="true"
     android:focusable="true"
+    android:layout_margin="10dp"
     android:id="@+id/cardview"
     app:cardElevation="10dp"
-    app:cardUseCompatPadding="true"
     tools:ignore="UnusedAttribute">
 
     <RelativeLayout
@@ -128,9 +127,7 @@
             android:src="@drawable/modify" />
 
         <ImageButton
-            android:id="@+id/face_scan"
-            android:clickable="true"
-            android:focusable="true"
+            android:id="@+id/call_stud"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/modify"
@@ -138,9 +135,10 @@
             android:layout_alignBottom="@+id/modify"
             android:layout_marginStart="20dp"
             android:layout_toEndOf="@+id/modify"
-            android:backgroundTint="#03A9F4"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/outline_face_24" />
+            android:backgroundTint="#2979FF"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_baseline_call_24" />
 
 
 

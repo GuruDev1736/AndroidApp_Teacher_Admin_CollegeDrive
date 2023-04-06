@@ -7,6 +7,7 @@ import static com.guruprasad.teacherattend.Constants.success_toast;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +25,8 @@ import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.adapter.student_adapter;
 import com.guruprasad.teacherattend.model.student_model;
 
+import java.util.Objects;
+
 public class computer extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner year , div ;
@@ -37,6 +40,11 @@ public class computer extends AppCompatActivity implements AdapterView.OnItemSel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_computer);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Computer Department ");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         year = findViewById(R.id.year_spinner);
         div = findViewById(R.id.div_spinner);

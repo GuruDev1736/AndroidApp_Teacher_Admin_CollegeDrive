@@ -5,6 +5,7 @@ import static com.guruprasad.teacherattend.Constants.info_toast;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,6 +21,8 @@ import com.guruprasad.teacherattend.R;
 import com.guruprasad.teacherattend.adapter.student_adapter;
 import com.guruprasad.teacherattend.model.student_model;
 
+import java.util.Objects;
+
 public class IT extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner year , div ;
     RecyclerView recyclerView ;
@@ -29,6 +32,10 @@ public class IT extends AppCompatActivity implements AdapterView.OnItemSelectedL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_it);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("IT Department ");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         year = findViewById(R.id.year_spinner);
         div = findViewById(R.id.div_spinner);
