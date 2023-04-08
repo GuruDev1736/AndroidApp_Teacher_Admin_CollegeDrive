@@ -1,10 +1,11 @@
 package com.guruprasad.teacherattend.model;
 
-public class attendance_model {
+public class attendance_combine_model {
 
-    String name , department ,phone_no , division , year , attendance , date , id , parent_no  ;
+    String name , department ,phone_no , division , year , attendance , date , id ;
+    String stud_name , parent_no , stud_no ,stud_email , stud_enroll;
 
-    public attendance_model(String name, String department, String phone_no, String division, String year, String attendance, String date, String id, String parent_no) {
+    public attendance_combine_model(String name, String department, String phone_no, String division, String year, String attendance, String date, String id, String stud_name, String parent_no, String stud_no, String stud_email, String stud_enroll) {
         this.name = name;
         this.department = department;
         this.phone_no = phone_no;
@@ -13,10 +14,14 @@ public class attendance_model {
         this.attendance = attendance;
         this.date = date;
         this.id = id;
+        this.stud_name = stud_name;
         this.parent_no = parent_no;
+        this.stud_no = stud_no;
+        this.stud_email = stud_email;
+        this.stud_enroll = stud_enroll;
     }
 
-    public attendance_model() {
+    public attendance_combine_model() {
     }
 
     public String getName() {
@@ -83,11 +88,43 @@ public class attendance_model {
         this.id = id;
     }
 
+    public String getStud_name() {
+        return stud_name;
+    }
+
+    public void setStud_name(String stud_name) {
+        this.stud_name = stud_name;
+    }
+
     public String getParent_no() {
         return parent_no;
     }
 
     public void setParent_no(String parent_no) {
         this.parent_no = parent_no;
+    }
+
+    public String getStud_no() {
+        return stud_no;
+    }
+
+    public void setStud_no(String stud_no) {
+        this.stud_no = stud_no;
+    }
+
+    public String getStud_email() {
+        return stud_email;
+    }
+
+    public void setStud_email(String stud_email) {
+        this.stud_email = stud_email;
+    }
+
+    public String getStud_enroll() {
+        return stud_enroll;
+    }
+
+    public void setStud_enroll(String stud_enroll) {
+        this.stud_enroll = stud_enroll;
     }
 }

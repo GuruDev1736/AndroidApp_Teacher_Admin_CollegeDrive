@@ -112,7 +112,7 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
                 pd.show();
 
                 attendance_model attendance_model = new attendance_model(model.getStud_name(),model.getDepartment(),model.getStud_no(),model.getDivision()
-                ,model.getYear(),attendance,date,key);
+                ,model.getYear(),attendance,date,key,model.getParent_no());
 
                 holder.databaseReference.child(model.getDepartment()).child(model.getYear()).child(model.getDivision()).child(date)
                         .child(myValue).child(sub_no).child(key)
@@ -177,7 +177,7 @@ public class attendance_adapter extends FirebaseRecyclerAdapter<student_model,at
 
 
                 attendance_model attendance_model = new attendance_model(model.getStud_name(),model.getDepartment(),model.getStud_no(),model.getDivision()
-                        ,model.getYear(),attendance,date,key);
+                        ,model.getYear(),attendance,date,key,model.getParent_no());
 
                 holder.databaseReference.child(model.getDepartment()).child(model.getYear()).child(model.getDivision()).child(date).child(myValue).child(sub_no)
                        .child(key)

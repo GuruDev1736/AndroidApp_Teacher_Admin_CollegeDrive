@@ -10,7 +10,15 @@
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="10dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -137,13 +145,13 @@
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
-                android:elevation="10dp"
                 android:layout_below="@+id/division_student"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="0dp" />
+                android:layout_marginEnd="0dp"
+                android:elevation="10dp" />
 
             <TextView
                 android:id="@+id/txt_workbook"
@@ -152,13 +160,14 @@
                 android:layout_below="@+id/divider"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:textStyle="bold"
                 android:padding="5dp"
                 android:text="Workbooks "
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <HorizontalScrollView
+                android:id="@+id/hor_scroll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_workbook"
@@ -212,7 +221,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="Status"
+                                android:text="Incomplete"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -251,12 +260,25 @@
                                 android:backgroundTint="@color/red"
                                 android:clickable="true"
                                 android:focusable="true"
-                                android:src="@drawable/baseline_close_24" />
+                                android:src="@drawable/baseline_close_24"
+                             />
 
                             <View
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
                                 android:background="@color/grey" />
+
+                            <ImageButton
+                                android:id="@+id/message_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/outline_message_24"
+                                android:backgroundTint="@color/blue_app"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"/>
 
 
                         </LinearLayout>
@@ -292,7 +314,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="Status"
+                                android:text="Incomplete"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -300,7 +322,6 @@
                             <View
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
-                                android:layout_alignParentRight="true"
                                 android:background="@color/grey" />
 
                             <EditText
@@ -310,10 +331,10 @@
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
-                                android:padding="8dp"
-                                android:text=""
                                 android:inputType="number"
                                 android:maxLength="2"
+                                android:padding="8dp"
+                                android:text=""
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -339,6 +360,18 @@
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
                                 android:background="@color/grey" />
+
+                            <ImageButton
+                                android:id="@+id/message_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/outline_message_24"
+                                android:backgroundTint="@color/blue_app"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"/>
 
 
                         </LinearLayout>
@@ -373,7 +406,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="Status"
+                                android:text="Incomplete"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -390,10 +423,10 @@
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
-                                android:padding="8dp"
-                                android:text=""
                                 android:inputType="number"
                                 android:maxLength="2"
+                                android:padding="8dp"
+                                android:text=""
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -419,6 +452,18 @@
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
                                 android:background="@color/grey" />
+
+                            <ImageButton
+                                android:id="@+id/message_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/outline_message_24"
+                                android:backgroundTint="@color/blue_app"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"/>
 
 
                         </LinearLayout>
@@ -453,7 +498,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="Status"
+                                android:text="Incomplete"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -470,10 +515,10 @@
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
-                                android:padding="8dp"
-                                android:text=""
                                 android:inputType="number"
                                 android:maxLength="2"
+                                android:padding="8dp"
+                                android:text=""
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -499,6 +544,18 @@
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
                                 android:background="@color/grey" />
+
+                            <ImageButton
+                                android:id="@+id/message_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/outline_message_24"
+                                android:backgroundTint="@color/blue_app"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"/>
 
 
                         </LinearLayout>
@@ -533,7 +590,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="Status"
+                                android:text="Incomplete"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -550,10 +607,10 @@
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
-                                android:padding="8dp"
-                                android:text=""
                                 android:inputType="number"
                                 android:maxLength="2"
+                                android:padding="8dp"
+                                android:text=""
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -579,6 +636,18 @@
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
                                 android:background="@color/grey" />
+
+                            <ImageButton
+                                android:id="@+id/message_5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/outline_message_24"
+                                android:backgroundTint="@color/blue_app"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"/>
 
 
                         </LinearLayout>
@@ -613,7 +682,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="Status"
+                                android:text="Incomplete"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -630,10 +699,10 @@
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
-                                android:padding="8dp"
-                                android:text=""
                                 android:inputType="number"
                                 android:maxLength="2"
+                                android:padding="8dp"
+                                android:text=""
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -659,6 +728,18 @@
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
                                 android:background="@color/grey" />
+
+                            <ImageButton
+                                android:id="@+id/message_6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/outline_message_24"
+                                android:backgroundTint="@color/blue_app"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>

@@ -7,14 +7,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -39,11 +42,12 @@ public class view_workbook extends AppCompatActivity {
 
     TextView name , department , year , division  ;
     ImageButton done_1 , done_2 , done_3 , done_4 , done_5 , done_6 ;
+    ImageButton message_1 , message_2 ,message_3 ,message_4 ,message_5 , message_6 ;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference = database.getReference("Submission");
 
     TextView workbook_1_status , workbook_2_status , workbook_3_status ,workbook_4_status , workbook_5_status, workbook_6_status ;
-    EditText marks_1_status , marks_2_status , marks_3_status ,marks_4_status ,marks_5_status ,marks_6_status;
+    EditText marks_1_status , marks_2_status , marks_3_status ,marks_4_status ,marks_5_status ,marks_6_status  ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,15 @@ public class view_workbook extends AppCompatActivity {
         marks_5_status = findViewById(R.id.marks_wb_5);
         marks_6_status = findViewById(R.id.marks_wb_6);
 
+        message_1 = findViewById(R.id.message_1);
+        message_2 = findViewById(R.id.message_2);
+        message_3 = findViewById(R.id.message_3);
+        message_4 = findViewById(R.id.message_4);
+        message_5 = findViewById(R.id.message_5);
+        message_6 = findViewById(R.id.message_6);
+
+
+
 
         Intent intent = getIntent();
         String Year = intent.getStringExtra("year");
@@ -84,6 +97,7 @@ public class view_workbook extends AppCompatActivity {
         String depart = intent.getStringExtra("depart");
         String stud_name = intent.getStringExtra("name");
         String sub = intent.getStringExtra("sub");
+        String student_no = intent.getStringExtra("stud_no");
         ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.green));
 
 
@@ -109,7 +123,9 @@ public class view_workbook extends AppCompatActivity {
         progressDialog.show();
 
 
+
         reference.child("Workbook").child(depart).child(Year).child(div).child(sub).child(stud_name).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -135,37 +151,70 @@ public class view_workbook extends AppCompatActivity {
                    {
                        done_1.setBackgroundTintList(colorStateList);
                        done_1.setImageResource(R.drawable.baseline_done_24);
+                       message_1.setVisibility(View.GONE);
                    }
+                   else
+                   {
+                       workbook_1_status.setText("Incomplete");
+                   }
+
                    if (model.getWorkbook_2()!=null && model.getWorkbook_2().equals("Completed"))
                    {
                        done_2.setBackgroundTintList(colorStateList);
                        done_2.setImageResource(R.drawable.baseline_done_24);
+                       message_2.setVisibility(View.GONE);
 
+                   }
+                   else
+                   {
+                       workbook_2_status.setText("Incomplete");
                    }
                    if (model.getWorkbook_3()!=null && model.getWorkbook_3().equals("Completed"))
                    {
                        done_3.setBackgroundTintList(colorStateList);
                        done_3.setImageResource(R.drawable.baseline_done_24);
+                       message_3.setVisibility(View.GONE);
 
+                   }
+                   else
+                   {
+                       workbook_3_status.setText("Incomplete");
                    }
                    if (model.getWorkbook_4()!=null && model.getWorkbook_4().equals("Completed"))
                    {
                        done_4.setBackgroundTintList(colorStateList);
                        done_4.setImageResource(R.drawable.baseline_done_24);
+                       message_4.setVisibility(View.GONE);
 
+                   }
+                   else
+                   {
+                       workbook_4_status.setText("Incomplete");
                    }
                    if (model.getWorkbook_5()!=null && model.getWorkbook_5().equals("Completed"))
                    {
                        done_5.setBackgroundTintList(colorStateList);
                        done_5.setImageResource(R.drawable.baseline_done_24);
+                       message_5.setVisibility(View.GONE);
 
+                   }
+                   else
+                   {
+                       workbook_5_status.setText("Incomplete");
                    }
                    if (model.getWorkbook_6()!=null && model.getWorkbook_6().equals("Completed"))
                    {
                        done_6.setBackgroundTintList(colorStateList);
                        done_6.setImageResource(R.drawable.baseline_done_24);
+                       message_6.setVisibility(View.GONE);
 
                    }
+                   else
+                   {
+                       workbook_6_status.setText("Incomplete");
+                   }
+
+
 
                }
 
@@ -202,7 +251,7 @@ public class view_workbook extends AppCompatActivity {
                                 reference.child("Workbook").child(depart).child(Year).child(div).child(sub).child(stud_name).child("marks_1").setValue(m1);
                                 pd.dismiss();
                                 success_toast(view.getContext(),"Data Updated");
-                                done_1.setVisibility(View.INVISIBLE);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -242,7 +291,7 @@ public class view_workbook extends AppCompatActivity {
                                 reference.child("Workbook").child(depart).child(Year).child(div).child(sub).child(stud_name).child("marks_2").setValue(m2);
                                 pd.dismiss();
                                 success_toast(view.getContext(),"Data Updated");
-                                done_2.setVisibility(View.INVISIBLE);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -279,7 +328,7 @@ public class view_workbook extends AppCompatActivity {
 
                                 pd.dismiss();
                                 success_toast(view.getContext(),"Data Updated");
-                                done_3.setVisibility(View.INVISIBLE);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -318,7 +367,7 @@ public class view_workbook extends AppCompatActivity {
 
                                 pd.dismiss();
                                 success_toast(view.getContext(),"Data Updated");
-                                done_4.setVisibility(View.INVISIBLE);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -357,7 +406,7 @@ public class view_workbook extends AppCompatActivity {
 
                                 pd.dismiss();
                                 success_toast(view.getContext(),"Data Updated");
-                                done_5.setVisibility(View.INVISIBLE);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -396,7 +445,7 @@ public class view_workbook extends AppCompatActivity {
 
                                 pd.dismiss();
                                 success_toast(view.getContext(),"Data Updated");
-                                done_6.setVisibility(View.INVISIBLE);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -409,8 +458,76 @@ public class view_workbook extends AppCompatActivity {
         });
 
 
+        message_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Workbook 1 submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+
+            }
+        });
+
+        message_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Workbook 2 submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+            }
+        });
+
+        message_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Workbook 3 submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+
+            }
+        });
+
+        message_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Workbook 4 submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+
+            }
+        });
+
+        message_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Workbook 5 submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+
+            }
+        });
+
+        message_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Workbook 6 submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+
+            }
+        });
 
     }
-
 }
