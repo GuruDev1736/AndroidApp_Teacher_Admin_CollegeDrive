@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +43,8 @@ public class view_micro_porject extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference = database.getReference("Submission");
 
+    FloatingActionButton button ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,7 @@ public class view_micro_porject extends AppCompatActivity {
         micro_name = findViewById(R.id.micro_project_name);
         status = findViewById(R.id.status);
         submit = findViewById(R.id.submit_micro_project);
+        button = findViewById(R.id.message_micro_project);
 
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Retriving Data");
@@ -73,6 +78,7 @@ public class view_micro_porject extends AppCompatActivity {
         String depart = intent.getStringExtra("depart");
         String stud_name = intent.getStringExtra("name");
         String sub = intent.getStringExtra("sub");
+        String student_no = intent.getStringExtra("stud_no");
 
         name.setText(stud_name);
         department.setText(depart);
@@ -85,12 +91,17 @@ public class view_micro_porject extends AppCompatActivity {
 
                 view_micro_project_model model = snapshot.getValue(view_micro_project_model.class);
 
-                if(model != null)
+                if(model != null )
                 {
                     micro_name.setText(model.getMicro_project_name());
                     micro_marks.setText(model.getMicro_project_marks());
                     status.setText(model.getStatus());
 
+                }
+
+                if (model != null && model.getStatus().equals("Completed"))
+                {
+                    button.setVisibility(View.GONE);
                 }
 
                 progressDialog.dismiss();
@@ -146,6 +157,19 @@ public class view_micro_porject extends AppCompatActivity {
                         });
 
 
+
+            }
+        });
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Micro-Project submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
 
             }
         });

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +42,8 @@ public class view_lab_manual extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference = database.getReference("Submission");
 
+    FloatingActionButton button ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class view_lab_manual extends AppCompatActivity {
         sub_name = findViewById(R.id.subject_name);
         sub_marks = findViewById(R.id.lab_manual_marks);
         status = findViewById(R.id.status);
+        button = findViewById(R.id.message_lab_manual);
 
 
 
@@ -74,11 +79,13 @@ public class view_lab_manual extends AppCompatActivity {
         String depart = intent.getStringExtra("depart");
         String stud_name = intent.getStringExtra("name");
         String sub = intent.getStringExtra("sub");
+        String student_no = intent.getStringExtra("stud_no");
 
         name.setText(stud_name);
         department.setText(depart);
         year.setText(Year);
         division.setText(div);
+        sub_name.setText(sub);
 
         reference.child("Lab_Manual").child(depart).child(Year).child(div).child(sub).child(stud_name).addValueEventListener(new ValueEventListener() {
             @Override
@@ -91,6 +98,11 @@ public class view_lab_manual extends AppCompatActivity {
                     sub_marks.setText(model.getLab_manual_marks());
                     status.setText(model.getStatus());
 
+                }
+
+                if (model !=null && model.getStatus().equals("Completed"))
+                {
+                    button.setVisibility(View.GONE);
                 }
 
                 progressDialog.dismiss();
@@ -150,6 +162,20 @@ public class view_lab_manual extends AppCompatActivity {
 
             }
         });
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Lab-Manual submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+
+            }
+        });
+
 
 
 

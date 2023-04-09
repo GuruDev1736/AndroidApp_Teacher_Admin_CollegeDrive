@@ -205,7 +205,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="Status"
+                                android:text="Incomplete"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -252,6 +252,18 @@
                                 android:layout_height="fill_parent"
                                 android:background="@color/grey" />
 
+                            <ImageButton
+                                android:id="@+id/message_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/outline_message_24"
+                                android:backgroundTint="@color/blue_app"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"/>
+
 
                         </LinearLayout>
 
@@ -285,7 +297,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="Status"
+                                android:text="Incomplete"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -331,6 +343,18 @@
                                 android:layout_height="fill_parent"
                                 android:background="@color/grey" />
 
+                            <ImageButton
+                                android:id="@+id/message_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/outline_message_24"
+                                android:backgroundTint="@color/blue_app"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"/>
+
 
 
                         </LinearLayout>
@@ -364,7 +388,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="Status"
+                                android:text="Incomplete"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -410,6 +434,18 @@
                                 android:layout_height="fill_parent"
                                 android:background="@color/grey" />
 
+                            <ImageButton
+                                android:id="@+id/message_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/outline_message_24"
+                                android:backgroundTint="@color/blue_app"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"/>
+
 
                         </LinearLayout>
 
@@ -442,7 +478,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="Status"
+                                android:text="Incomplete"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -489,6 +525,19 @@
                                 android:background="@color/grey" />
 
 
+                            <ImageButton
+                                android:id="@+id/message_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/outline_message_24"
+                                android:backgroundTint="@color/blue_app"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"/>
+
+
                         </LinearLayout>
 
                         <LinearLayout
@@ -520,7 +569,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="Status"
+                                android:text="Incomplete"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -566,6 +615,18 @@
                                 android:layout_height="fill_parent"
                                 android:background="@color/grey" />
 
+                            <ImageButton
+                                android:id="@+id/message_5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/outline_message_24"
+                                android:backgroundTint="@color/blue_app"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"/>
+
 
                         </LinearLayout>
 
@@ -598,7 +659,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:gravity="center"
                                 android:padding="8dp"
-                                android:text="Status"
+                                android:text="Incomplete"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
@@ -643,6 +704,19 @@
                                 android:layout_width="0.5dp"
                                 android:layout_height="fill_parent"
                                 android:background="@color/grey" />
+
+
+                            <ImageButton
+                                android:id="@+id/message_6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/outline_message_24"
+                                android:backgroundTint="@color/blue_app"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>

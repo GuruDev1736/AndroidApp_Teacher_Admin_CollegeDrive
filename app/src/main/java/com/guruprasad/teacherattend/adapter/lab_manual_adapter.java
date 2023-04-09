@@ -40,6 +40,7 @@ public class lab_manual_adapter extends FirebaseRecyclerAdapter<combine_model,la
                 intent.putExtra("year",model.getYear());
                 intent.putExtra("div",model.getDivision());
                 intent.putExtra("sub",sub);
+                intent.putExtra("stud_no",model.getStud_no());
                 holder.itemView.getContext().startActivity(intent);
             }
         });

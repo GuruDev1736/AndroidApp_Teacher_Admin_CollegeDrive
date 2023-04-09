@@ -11,6 +11,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
@@ -40,6 +41,8 @@ public class view_assignment extends AppCompatActivity {
     TextView assignment_1_status , assignment_2_status , assignment_3_status ,assignment_4_status , assignment_5_status, assignment_6_status ;
 
     EditText marks_1_status , marks_2_status , marks_3_status ,marks_4_status ,marks_5_status ,marks_6_status;
+
+    ImageButton message_1 , message_2 , message_3 ,message_4 ,message_5 ,message_6 ;
 
 
     @Override
@@ -74,6 +77,13 @@ public class view_assignment extends AppCompatActivity {
         marks_5_status = findViewById(R.id.marks_assign_5);
         marks_6_status = findViewById(R.id.marks_assign_6);
 
+        message_1 = findViewById(R.id.message_1);
+        message_2 = findViewById(R.id.message_2);
+        message_3 = findViewById(R.id.message_3);
+        message_4 = findViewById(R.id.message_4);
+        message_5 = findViewById(R.id.message_5);
+        message_6 = findViewById(R.id.message_6);
+
 
         Intent intent = getIntent();
         String Year = intent.getStringExtra("year");
@@ -81,6 +91,7 @@ public class view_assignment extends AppCompatActivity {
         String depart = intent.getStringExtra("depart");
         String stud_name = intent.getStringExtra("name");
         String sub = intent.getStringExtra("sub");
+        String student_no = intent.getStringExtra("student_no");
         ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.green));
 
 
@@ -129,35 +140,42 @@ public class view_assignment extends AppCompatActivity {
                     {
                         done_1.setBackgroundTintList(colorStateList);
                         done_1.setImageResource(R.drawable.baseline_done_24);
+                        message_1.setVisibility(View.GONE);
                     }
+
                     if (model.getAssignment_2()!=null && model.getAssignment_2().equals("Completed"))
                     {
                         done_2.setBackgroundTintList(colorStateList);
                         done_2.setImageResource(R.drawable.baseline_done_24);
+                        message_2.setVisibility(View.GONE);
 
                     }
                     if (model.getAssignment_3()!=null && model.getAssignment_3().equals("Completed"))
                     {
                         done_3.setBackgroundTintList(colorStateList);
                         done_3.setImageResource(R.drawable.baseline_done_24);
+                        message_3.setVisibility(View.GONE);
 
                     }
                     if (model.getAssignment_4()!=null && model.getAssignment_4().equals("Completed"))
                     {
                         done_4.setBackgroundTintList(colorStateList);
                         done_4.setImageResource(R.drawable.baseline_done_24);
+                        message_4.setVisibility(View.GONE);
 
                     }
                     if (model.getAssignment_5()!=null && model.getAssignment_5().equals("Completed"))
                     {
                         done_5.setBackgroundTintList(colorStateList);
                         done_5.setImageResource(R.drawable.baseline_done_24);
+                        message_5.setVisibility(View.GONE);
 
                     }
                     if (model.getAssignment_6()!=null && model.getAssignment_6().equals("Completed"))
                     {
                         done_6.setBackgroundTintList(colorStateList);
                         done_6.setImageResource(R.drawable.baseline_done_24);
+                        message_6.setVisibility(View.GONE);
 
                     }
 
@@ -203,7 +221,7 @@ public class view_assignment extends AppCompatActivity {
 
                                 pd.dismiss();
                                 success_toast(view.getContext(),"Data Updated");
-                                done_1.setVisibility(View.INVISIBLE);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -244,7 +262,7 @@ public class view_assignment extends AppCompatActivity {
 
                                 pd.dismiss();
                                 success_toast(view.getContext(),"Data Updated");
-                                done_2.setVisibility(View.INVISIBLE);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -282,7 +300,7 @@ public class view_assignment extends AppCompatActivity {
 
                                 pd.dismiss();
                                 success_toast(view.getContext(),"Data Updated");
-                                done_3.setVisibility(View.INVISIBLE);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -320,7 +338,6 @@ public class view_assignment extends AppCompatActivity {
 
                                 pd.dismiss();
                                 success_toast(view.getContext(),"Data Updated");
-                                done_4.setVisibility(View.INVISIBLE);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -362,7 +379,6 @@ public class view_assignment extends AppCompatActivity {
 
                                 pd.dismiss();
                                 success_toast(view.getContext(),"Data Updated");
-                                done_5.setVisibility(View.INVISIBLE);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -401,7 +417,7 @@ public class view_assignment extends AppCompatActivity {
                                 reference.child("Assignment").child(depart).child(Year).child(div).child(sub).child(stud_name).child("marks_6").setValue(m6);
                                 pd.dismiss();
                                 success_toast(view.getContext(),"Data Updated");
-                                done_6.setVisibility(View.INVISIBLE);
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -410,6 +426,78 @@ public class view_assignment extends AppCompatActivity {
                                 error_toast(view.getContext(),"Error : "+e.getMessage());
                             }
                         });
+            }
+        });
+
+
+        message_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Assignment 1 submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+
+            }
+        });
+
+        message_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Assignment 2 submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+            }
+        });
+
+        message_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Assignment 3 submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+
+            }
+        });
+
+        message_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Assignment 4 submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+
+            }
+        });
+
+        message_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Assignment 5 submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+
+            }
+        });
+
+        message_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String message = "Hello, "+stud_name+" your "+sub+" Subject Assignment 6 submission is remaining. Please submit as soon as possible .";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(student_no, null, message, null, null);
+                success_toast(view.getContext(),"SMS sent");
+
             }
         });
 

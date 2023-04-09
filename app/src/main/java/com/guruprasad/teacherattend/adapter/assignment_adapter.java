@@ -40,6 +40,7 @@ public class assignment_adapter extends FirebaseRecyclerAdapter<combine_model,as
                 intent.putExtra("year",model.getYear());
                 intent.putExtra("div",model.getDivision());
                 intent.putExtra("sub",sub);
+                intent.putExtra("student_no",model.getStud_no());
                 holder.itemView.getContext().startActivity(intent);
             }
         });

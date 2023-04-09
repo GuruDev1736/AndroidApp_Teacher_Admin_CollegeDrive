@@ -219,7 +219,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="27dp"
                 android:layout_toEndOf="@+id/marks_layout"
-                android:text="Status"
+                android:text="Incomplete"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -238,6 +238,20 @@
                 android:padding="15dp"
                 android:text="Submit"
                 android:textAllCaps="false" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/message_micro_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/submit_micro_project"
+                android:layout_alignEnd="@+id/submit_micro_project"
+                android:layout_marginStart="165dp"
+                android:layout_marginTop="50dp"
+                android:backgroundTint="@color/blue_app"
+                android:clickable="true"
+                android:contentDescription="TODO"
+                android:focusable="true"
+                app:srcCompat="@drawable/outline_message_24" />
 
 
         </RelativeLayout>
